@@ -22,8 +22,7 @@ using json = nlohmann::json;
 using pt::Application;
 
 Application::Application()
-    : wxApp(),
-    m_singleInstance(std::make_unique<wxSingleInstanceChecker>("584c8e47-d8a5-4e52-9165-c0650a85723a"))
+    : wxApp()
 {
     SetProcessDPIAware();
 }
@@ -79,6 +78,12 @@ bool Application::OnInit()
         WaitForPreviousInstance(m_options.pid);
     }
 
+    // Only check for another running instance once we know the previous
+    // instance (if any) has actually exited - creating the checker earlier
+    // (eg. as soon as the process starts) would race against the previous
+    // instance still shutting down and wrongly detect it as "still running".
+    m_singleInstance = std::make_unique<wxSingleInstanceChecker>("584c8e47-d8a5-4e52-9165-c0650a85723a");
+
     if (m_singleInstance->IsAnotherRunning())
     {
         ActivateOtherInstance();
@@ -110,9 +115,20 @@ bool Application::OnInit()
             .value_or(env->GetCurrentLocale()));
     
     // Load theme
-    if (cfg->IsDarkMode())
+    //
+    // MSWEnableDarkMode()'s default flag (DarkMode_Auto) just follows the
+    // system's own light/dark setting - it does not force dark mode. An
+    // explicit "dark" choice must pass DarkMode_Always, or picking it while
+    // Windows itself is in light mode would have no visible effect.
+    std::string const themeId = cfg->Get<std::string>("theme_id").value_or("system");
+
+    if (themeId == "dark")
     {
-        wxApp::MSWEnableDarkMode();
+        wxApp::MSWEnableDarkMode(wxApp::DarkMode_Always);
+    }
+    else if (themeId != "light" && cfg->IsSystemDarkMode())
+    {
+        wxApp::MSWEnableDarkMode(wxApp::DarkMode_Auto);
     }
 
     // Load plugins
