@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 cmake_policy(SET CMP0092 NEW) # don't add /W3 as default
 cmake_policy(SET CMP0115 OLD) # Source file extensions must be explicit.
 
-# set(VCPKG_OVERLAY_PORTS    ${CMAKE_CURRENT_SOURCE_DIR}/vendor/vcpkg-overlays/ports)
 set(VCPKG_OVERLAY_TRIPLETS ${CMAKE_CURRENT_SOURCE_DIR}/vendor/vcpkg-overlays/triplets)
 set(CMAKE_TOOLCHAIN_FILE   ${CMAKE_CURRENT_SOURCE_DIR}/vendor/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
 
@@ -14,25 +13,18 @@ set(CMAKE_CXX_STANDARD 17)
 option(WITH_STATIC_CRT "" Off)
 # -----------------------
 
-# --------- wx options
-set(wxBUILD_SHARED        OFF   CACHE BOOL   "" FORCE)
-set(wxBUILD_COMPATIBILITY "3.2" CACHE STRING "" FORCE)
-set(wxUSE_EXCEPTIONS      OFF   CACHE BOOL   "" FORCE)
-# --------------------
-
-# vendor libs
-add_subdirectory(vendor/sentry-crashpad)
-add_subdirectory(vendor/wx)
-
 # pico components
 add_subdirectory(src/pql)
 
 # vcpkg packages
 find_package(Boost                      REQUIRED COMPONENTS log)
 find_package(fmt                 CONFIG REQUIRED)
+find_package(OpenSSL             MODULE REQUIRED)
 find_package(LibtorrentRasterbar CONFIG REQUIRED)
 find_package(nlohmann_json       CONFIG REQUIRED)
+find_package(sentry              CONFIG REQUIRED)
 find_package(unofficial-sqlite3  CONFIG REQUIRED)
+find_package(wxWidgets            CONFIG REQUIRED)
 
 # Generate buildinfo file
 configure_file("${CMAKE_SOURCE_DIR}/src/picotorrent/buildinfo.cpp.in" "${CMAKE_SOURCE_DIR}/src/picotorrent/buildinfo.cpp" @ONLY)
@@ -203,7 +195,7 @@ target_link_libraries(
     Boost::log
 
     # wxWidgets
-    wxcore wxbase wxpropgrid
+    wx::core wx::base wx::propgrid
 
     # Windows
     Comctl32
@@ -215,10 +207,8 @@ target_link_libraries(
     wininet
     winhttp
 
-    # Crashpad
-    crashpad_client
-    crashpad_util
-    mini_chromium
+    # Sentry
+    sentry::sentry
 
     # fmt
     fmt::fmt
@@ -248,11 +238,11 @@ target_compile_definitions(Plugin_Updater PRIVATE -D_WIN32 -DUNICODE -DWIN32_LEA
 target_include_directories(Plugin_Updater PRIVATE include)
 target_link_libraries(Plugin_Updater PRIVATE PicoTorrent Comctl32)
 
-# Copy Crashpad handler
+# Copy Crashpad handler (built by the sentry-native vcpkg port)
 add_custom_command(
     TARGET PicoTorrent POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_if_different
-        $<TARGET_FILE:crashpad_handler>
+        "${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/tools/sentry-native/crashpad_handler.exe"
         $<TARGET_FILE_DIR:PicoTorrent>
 )
 

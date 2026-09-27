@@ -1,5 +1,6 @@
 #include "pqltorrentfilter.hpp"
 
+#include <any>
 #include <optional>
 
 #include <boost/log/trivial.hpp>
@@ -8,6 +9,12 @@
 #include <QueryBaseVisitor.h>
 #include <QueryLexer.h>
 #include <QueryParser.h>
+
+// antlr4-runtime.h already provides a Windows ssize_t typedef; tell the
+// wxWidgets headers pulled in below not to declare a conflicting one.
+#ifndef HAVE_SSIZE_T
+#define HAVE_SSIZE_T
+#endif
 
 #include "../../bittorrent/torrenthandle.hpp"
 #include "../../bittorrent/torrentstatus.hpp"
@@ -70,7 +77,7 @@ public:
         m_msg = oss.str();
     }
 
-    virtual const char* what() const NOEXCEPT override
+    virtual const char* what() const noexcept override
     {
         return m_msg.c_str();
     }
@@ -107,13 +114,13 @@ bool Compare(TLeft const& lhs, TRight const& rhs, Operator oper)
 class FilterVisitor : public pt::PQL::QueryBaseVisitor
 {
 public:
-    virtual antlrcpp::Any visitAndExpression(pt::PQL::QueryParser::AndExpressionContext* ctx) override
+    virtual std::any visitAndExpression(pt::PQL::QueryParser::AndExpressionContext* ctx) override
     {
         std::vector<FilterFunc> funcs;
 
         for (auto expr : ctx->expression())
         {
-            funcs.push_back(this->visit(expr));
+            funcs.push_back(std::any_cast<FilterFunc>(this->visit(expr)));
         }
 
         return FilterFunc([funcs](TorrentStatus const& ts)
@@ -128,18 +135,18 @@ public:
             });
     }
 
-    virtual antlrcpp::Any visitFilter(pt::PQL::QueryParser::FilterContext* ctx) override
+    virtual std::any visitFilter(pt::PQL::QueryParser::FilterContext* ctx) override
     {
         return this->visit(ctx->expression());
     }
 
-    virtual antlrcpp::Any visitOrExpression(pt::PQL::QueryParser::OrExpressionContext* ctx) override
+    virtual std::any visitOrExpression(pt::PQL::QueryParser::OrExpressionContext* ctx) override
     {
         std::vector<FilterFunc> funcs;
 
         for (auto expr : ctx->expression())
         {
-            funcs.push_back(this->visit(expr));
+            funcs.push_back(std::any_cast<FilterFunc>(this->visit(expr)));
         }
 
         return FilterFunc([funcs](TorrentStatus const& ts)
@@ -154,7 +161,7 @@ public:
             });
     }
 
-    virtual antlrcpp::Any visitOper(pt::PQL::QueryParser::OperContext* ctx) override
+    virtual std::any visitOper(pt::PQL::QueryParser::OperContext* ctx) override
     {
         if (ctx->CONTAINS()) return Operator::CONTAINS;
         if (ctx->EQ()) return Operator::EQ;
@@ -169,11 +176,11 @@ public:
             ctx->getStart()->getCharPositionInLine());
     }
 
-    virtual antlrcpp::Any visitOperatorPredicate(pt::PQL::QueryParser::OperatorPredicateContext* ctx) override
+    virtual std::any visitOperatorPredicate(pt::PQL::QueryParser::OperatorPredicateContext* ctx) override
     {
-        std::string ref = this->visit(ctx->reference());
-        Operator oper = this->visit(ctx->oper());
-        Value value = this->visit(ctx->value());
+        std::string ref = std::any_cast<std::string>(this->visit(ctx->reference()));
+        Operator oper = std::any_cast<Operator>(this->visit(ctx->oper()));
+        Value value = std::any_cast<Value>(this->visit(ctx->value()));
 
         auto field = FieldValidators.find(ref);
 
@@ -315,17 +322,17 @@ public:
             ctx->getStart()->getCharPositionInLine());
     }
 
-    virtual antlrcpp::Any visitPredicateExpression(pt::PQL::QueryParser::PredicateExpressionContext* ctx) override
+    virtual std::any visitPredicateExpression(pt::PQL::QueryParser::PredicateExpressionContext* ctx) override
     {
         return this->visit(ctx->predicate());
     }
 
-    virtual antlrcpp::Any visitReference(pt::PQL::QueryParser::ReferenceContext* ctx) override
+    virtual std::any visitReference(pt::PQL::QueryParser::ReferenceContext* ctx) override
     {
         return ctx->getText();
     }
 
-    virtual antlrcpp::Any visitValue(pt::PQL::QueryParser::ValueContext* ctx) override
+    virtual std::any visitValue(pt::PQL::QueryParser::ValueContext* ctx) override
     {
         Value val;
 
@@ -398,7 +405,7 @@ std::unique_ptr<pt::UI::Filters::TorrentFilter> PqlTorrentFilter::Create(std::st
     try
     {
         FilterVisitor visitor;
-        FilterFunc func = visitor.visitFilter(parser.filter());
+        FilterFunc func = std::any_cast<FilterFunc>(visitor.visitFilter(parser.filter()));
 
         return std::unique_ptr<TorrentFilter>(new PqlTorrentFilter(func));
     }

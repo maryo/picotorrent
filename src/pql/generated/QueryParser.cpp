@@ -1,5 +1,5 @@
 
-// Generated from .\Query.g4 by ANTLR 4.9
+// Generated from ./Query.g4 by ANTLR 4.13.2
 
 
 #include "QueryVisitor.h"
@@ -9,14 +9,111 @@
 
 using namespace antlrcpp;
 using namespace pt::PQL;
+
 using namespace antlr4;
 
-QueryParser::QueryParser(TokenStream *input) : Parser(input) {
-  _interpreter = new atn::ParserATNSimulator(this, _atn, _decisionToDFA, _sharedContextCache);
+namespace {
+
+struct QueryParserStaticData final {
+  QueryParserStaticData(std::vector<std::string> ruleNames,
+                        std::vector<std::string> literalNames,
+                        std::vector<std::string> symbolicNames)
+      : ruleNames(std::move(ruleNames)), literalNames(std::move(literalNames)),
+        symbolicNames(std::move(symbolicNames)),
+        vocabulary(this->literalNames, this->symbolicNames) {}
+
+  QueryParserStaticData(const QueryParserStaticData&) = delete;
+  QueryParserStaticData(QueryParserStaticData&&) = delete;
+  QueryParserStaticData& operator=(const QueryParserStaticData&) = delete;
+  QueryParserStaticData& operator=(QueryParserStaticData&&) = delete;
+
+  std::vector<antlr4::dfa::DFA> decisionToDFA;
+  antlr4::atn::PredictionContextCache sharedContextCache;
+  const std::vector<std::string> ruleNames;
+  const std::vector<std::string> literalNames;
+  const std::vector<std::string> symbolicNames;
+  const antlr4::dfa::Vocabulary vocabulary;
+  antlr4::atn::SerializedATNView serializedATN;
+  std::unique_ptr<antlr4::atn::ATN> atn;
+};
+
+::antlr4::internal::OnceFlag queryParserOnceFlag;
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+static thread_local
+#endif
+std::unique_ptr<QueryParserStaticData> queryParserStaticData = nullptr;
+
+void queryParserInitialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  if (queryParserStaticData != nullptr) {
+    return;
+  }
+#else
+  assert(queryParserStaticData == nullptr);
+#endif
+  auto staticData = std::make_unique<QueryParserStaticData>(
+    std::vector<std::string>{
+      "filter", "expression", "reference", "predicate", "oper", "value"
+    },
+    std::vector<std::string>{
+      "", "'and'", "'or'", "'='", "'~'", "'>'", "'>='", "'<'", "'<='"
+    },
+    std::vector<std::string>{
+      "", "AND", "OR", "EQ", "CONTAINS", "GT", "GTE", "LT", "LTE", "WS", 
+      "INT", "FLOAT", "STRING", "UNIT_SIZE", "UNIT_SPEED", "ID"
+    }
+  );
+  static const int32_t serializedATNSegment[] = {
+  	4,1,15,68,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,1,0,1,0,1,1,
+  	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,5,1,24,8,1,10,1,12,1,27,9,1,1,2,1,2,1,
+  	3,1,3,1,3,1,3,1,4,1,4,1,5,1,5,3,5,39,8,5,1,5,3,5,42,8,5,1,5,1,5,3,5,46,
+  	8,5,1,5,3,5,49,8,5,1,5,1,5,3,5,53,8,5,1,5,3,5,56,8,5,1,5,1,5,3,5,60,8,
+  	5,1,5,3,5,63,8,5,1,5,3,5,66,8,5,1,5,0,1,2,6,0,2,4,6,8,10,0,1,1,0,3,8,
+  	75,0,12,1,0,0,0,2,14,1,0,0,0,4,28,1,0,0,0,6,30,1,0,0,0,8,34,1,0,0,0,10,
+  	65,1,0,0,0,12,13,3,2,1,0,13,1,1,0,0,0,14,15,6,1,-1,0,15,16,3,6,3,0,16,
+  	25,1,0,0,0,17,18,10,3,0,0,18,19,5,1,0,0,19,24,3,2,1,4,20,21,10,2,0,0,
+  	21,22,5,2,0,0,22,24,3,2,1,3,23,17,1,0,0,0,23,20,1,0,0,0,24,27,1,0,0,0,
+  	25,23,1,0,0,0,25,26,1,0,0,0,26,3,1,0,0,0,27,25,1,0,0,0,28,29,5,15,0,0,
+  	29,5,1,0,0,0,30,31,3,4,2,0,31,32,3,8,4,0,32,33,3,10,5,0,33,7,1,0,0,0,
+  	34,35,7,0,0,0,35,9,1,0,0,0,36,38,5,10,0,0,37,39,5,9,0,0,38,37,1,0,0,0,
+  	38,39,1,0,0,0,39,41,1,0,0,0,40,42,5,13,0,0,41,40,1,0,0,0,41,42,1,0,0,
+  	0,42,66,1,0,0,0,43,45,5,10,0,0,44,46,5,9,0,0,45,44,1,0,0,0,45,46,1,0,
+  	0,0,46,48,1,0,0,0,47,49,5,14,0,0,48,47,1,0,0,0,48,49,1,0,0,0,49,66,1,
+  	0,0,0,50,52,5,11,0,0,51,53,5,9,0,0,52,51,1,0,0,0,52,53,1,0,0,0,53,55,
+  	1,0,0,0,54,56,5,13,0,0,55,54,1,0,0,0,55,56,1,0,0,0,56,66,1,0,0,0,57,59,
+  	5,11,0,0,58,60,5,9,0,0,59,58,1,0,0,0,59,60,1,0,0,0,60,62,1,0,0,0,61,63,
+  	5,14,0,0,62,61,1,0,0,0,62,63,1,0,0,0,63,66,1,0,0,0,64,66,5,12,0,0,65,
+  	36,1,0,0,0,65,43,1,0,0,0,65,50,1,0,0,0,65,57,1,0,0,0,65,64,1,0,0,0,66,
+  	11,1,0,0,0,11,23,25,38,41,45,48,52,55,59,62,65
+  };
+  staticData->serializedATN = antlr4::atn::SerializedATNView(serializedATNSegment, sizeof(serializedATNSegment) / sizeof(serializedATNSegment[0]));
+
+  antlr4::atn::ATNDeserializer deserializer;
+  staticData->atn = deserializer.deserialize(staticData->serializedATN);
+
+  const size_t count = staticData->atn->getNumberOfDecisions();
+  staticData->decisionToDFA.reserve(count);
+  for (size_t i = 0; i < count; i++) { 
+    staticData->decisionToDFA.emplace_back(staticData->atn->getDecisionState(i), i);
+  }
+  queryParserStaticData = std::move(staticData);
+}
+
+}
+
+QueryParser::QueryParser(TokenStream *input) : QueryParser(input, antlr4::atn::ParserATNSimulatorOptions()) {}
+
+QueryParser::QueryParser(TokenStream *input, const antlr4::atn::ParserATNSimulatorOptions &options) : Parser(input) {
+  QueryParser::initialize();
+  _interpreter = new atn::ParserATNSimulator(this, *queryParserStaticData->atn, queryParserStaticData->decisionToDFA, queryParserStaticData->sharedContextCache, options);
 }
 
 QueryParser::~QueryParser() {
   delete _interpreter;
+}
+
+const atn::ATN& QueryParser::getATN() const {
+  return *queryParserStaticData->atn;
 }
 
 std::string QueryParser::getGrammarFileName() const {
@@ -24,11 +121,15 @@ std::string QueryParser::getGrammarFileName() const {
 }
 
 const std::vector<std::string>& QueryParser::getRuleNames() const {
-  return _ruleNames;
+  return queryParserStaticData->ruleNames;
 }
 
-dfa::Vocabulary& QueryParser::getVocabulary() const {
-  return _vocabulary;
+const dfa::Vocabulary& QueryParser::getVocabulary() const {
+  return queryParserStaticData->vocabulary;
+}
+
+antlr4::atn::SerializedATNView QueryParser::getSerializedATN() const {
+  return queryParserStaticData->serializedATN;
 }
 
 
@@ -48,7 +149,7 @@ size_t QueryParser::FilterContext::getRuleIndex() const {
 }
 
 
-antlrcpp::Any QueryParser::FilterContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any QueryParser::FilterContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<QueryVisitor*>(visitor))
     return parserVisitor->visitFilter(this);
   else
@@ -113,7 +214,7 @@ tree::TerminalNode* QueryParser::AndExpressionContext::AND() {
 QueryParser::AndExpressionContext::AndExpressionContext(ExpressionContext *ctx) { copyFrom(ctx); }
 
 
-antlrcpp::Any QueryParser::AndExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any QueryParser::AndExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<QueryVisitor*>(visitor))
     return parserVisitor->visitAndExpression(this);
   else
@@ -128,7 +229,7 @@ QueryParser::PredicateContext* QueryParser::PredicateExpressionContext::predicat
 QueryParser::PredicateExpressionContext::PredicateExpressionContext(ExpressionContext *ctx) { copyFrom(ctx); }
 
 
-antlrcpp::Any QueryParser::PredicateExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any QueryParser::PredicateExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<QueryVisitor*>(visitor))
     return parserVisitor->visitPredicateExpression(this);
   else
@@ -151,7 +252,7 @@ tree::TerminalNode* QueryParser::OrExpressionContext::OR() {
 QueryParser::OrExpressionContext::OrExpressionContext(ExpressionContext *ctx) { copyFrom(ctx); }
 
 
-antlrcpp::Any QueryParser::OrExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any QueryParser::OrExpressionContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<QueryVisitor*>(visitor))
     return parserVisitor->visitOrExpression(this);
   else
@@ -262,7 +363,7 @@ size_t QueryParser::ReferenceContext::getRuleIndex() const {
 }
 
 
-antlrcpp::Any QueryParser::ReferenceContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any QueryParser::ReferenceContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<QueryVisitor*>(visitor))
     return parserVisitor->visitReference(this);
   else
@@ -327,7 +428,7 @@ QueryParser::ValueContext* QueryParser::OperatorPredicateContext::value() {
 QueryParser::OperatorPredicateContext::OperatorPredicateContext(PredicateContext *ctx) { copyFrom(ctx); }
 
 
-antlrcpp::Any QueryParser::OperatorPredicateContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any QueryParser::OperatorPredicateContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<QueryVisitor*>(visitor))
     return parserVisitor->visitOperatorPredicate(this);
   else
@@ -345,7 +446,7 @@ QueryParser::PredicateContext* QueryParser::predicate() {
     exitRule();
   });
   try {
-    _localctx = dynamic_cast<PredicateContext *>(_tracker.createInstance<QueryParser::OperatorPredicateContext>(_localctx));
+    _localctx = _tracker.createInstance<QueryParser::OperatorPredicateContext>(_localctx);
     enterOuterAlt(_localctx, 1);
     setState(30);
     reference();
@@ -400,7 +501,7 @@ size_t QueryParser::OperContext::getRuleIndex() const {
 }
 
 
-antlrcpp::Any QueryParser::OperContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any QueryParser::OperContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<QueryVisitor*>(visitor))
     return parserVisitor->visitOper(this);
   else
@@ -424,12 +525,7 @@ QueryParser::OperContext* QueryParser::oper() {
     setState(34);
     _la = _input->LA(1);
     if (!((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & ((1ULL << QueryParser::EQ)
-      | (1ULL << QueryParser::CONTAINS)
-      | (1ULL << QueryParser::GT)
-      | (1ULL << QueryParser::GTE)
-      | (1ULL << QueryParser::LT)
-      | (1ULL << QueryParser::LTE))) != 0))) {
+      ((1ULL << _la) & 504) != 0))) {
     _errHandler->recoverInline(this);
     }
     else {
@@ -483,7 +579,7 @@ size_t QueryParser::ValueContext::getRuleIndex() const {
 }
 
 
-antlrcpp::Any QueryParser::ValueContext::accept(tree::ParseTreeVisitor *visitor) {
+std::any QueryParser::ValueContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<QueryVisitor*>(visitor))
     return parserVisitor->visitValue(this);
   else
@@ -660,7 +756,7 @@ QueryParser::ValueContext* QueryParser::value() {
 
 bool QueryParser::sempred(RuleContext *context, size_t ruleIndex, size_t predicateIndex) {
   switch (ruleIndex) {
-    case 1: return expressionSempred(dynamic_cast<ExpressionContext *>(context), predicateIndex);
+    case 1: return expressionSempred(antlrcpp::downCast<ExpressionContext *>(context), predicateIndex);
 
   default:
     break;
@@ -679,105 +775,10 @@ bool QueryParser::expressionSempred(ExpressionContext *_localctx, size_t predica
   return true;
 }
 
-// Static vars and initialization.
-std::vector<dfa::DFA> QueryParser::_decisionToDFA;
-atn::PredictionContextCache QueryParser::_sharedContextCache;
-
-// We own the ATN which in turn owns the ATN states.
-atn::ATN QueryParser::_atn;
-std::vector<uint16_t> QueryParser::_serializedATN;
-
-std::vector<std::string> QueryParser::_ruleNames = {
-  "filter", "expression", "reference", "predicate", "oper", "value"
-};
-
-std::vector<std::string> QueryParser::_literalNames = {
-  "", "'and'", "'or'", "'='", "'~'", "'>'", "'>='", "'<'", "'<='"
-};
-
-std::vector<std::string> QueryParser::_symbolicNames = {
-  "", "AND", "OR", "EQ", "CONTAINS", "GT", "GTE", "LT", "LTE", "WS", "INT", 
-  "FLOAT", "STRING", "UNIT_SIZE", "UNIT_SPEED", "ID"
-};
-
-dfa::Vocabulary QueryParser::_vocabulary(_literalNames, _symbolicNames);
-
-std::vector<std::string> QueryParser::_tokenNames;
-
-QueryParser::Initializer::Initializer() {
-	for (size_t i = 0; i < _symbolicNames.size(); ++i) {
-		std::string name = _vocabulary.getLiteralName(i);
-		if (name.empty()) {
-			name = _vocabulary.getSymbolicName(i);
-		}
-
-		if (name.empty()) {
-			_tokenNames.push_back("<INVALID>");
-		} else {
-      _tokenNames.push_back(name);
-    }
-	}
-
-  _serializedATN = {
-    0x3, 0x608b, 0xa72a, 0x8133, 0xb9ed, 0x417c, 0x3be7, 0x7786, 0x5964, 
-    0x3, 0x11, 0x46, 0x4, 0x2, 0x9, 0x2, 0x4, 0x3, 0x9, 0x3, 0x4, 0x4, 0x9, 
-    0x4, 0x4, 0x5, 0x9, 0x5, 0x4, 0x6, 0x9, 0x6, 0x4, 0x7, 0x9, 0x7, 0x3, 
-    0x2, 0x3, 0x2, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 
-    0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x7, 0x3, 0x1a, 0xa, 0x3, 0xc, 0x3, 
-    0xe, 0x3, 0x1d, 0xb, 0x3, 0x3, 0x4, 0x3, 0x4, 0x3, 0x5, 0x3, 0x5, 0x3, 
-    0x5, 0x3, 0x5, 0x3, 0x6, 0x3, 0x6, 0x3, 0x7, 0x3, 0x7, 0x5, 0x7, 0x29, 
-    0xa, 0x7, 0x3, 0x7, 0x5, 0x7, 0x2c, 0xa, 0x7, 0x3, 0x7, 0x3, 0x7, 0x5, 
-    0x7, 0x30, 0xa, 0x7, 0x3, 0x7, 0x5, 0x7, 0x33, 0xa, 0x7, 0x3, 0x7, 0x3, 
-    0x7, 0x5, 0x7, 0x37, 0xa, 0x7, 0x3, 0x7, 0x5, 0x7, 0x3a, 0xa, 0x7, 0x3, 
-    0x7, 0x3, 0x7, 0x5, 0x7, 0x3e, 0xa, 0x7, 0x3, 0x7, 0x5, 0x7, 0x41, 0xa, 
-    0x7, 0x3, 0x7, 0x5, 0x7, 0x44, 0xa, 0x7, 0x3, 0x7, 0x2, 0x3, 0x4, 0x8, 
-    0x2, 0x4, 0x6, 0x8, 0xa, 0xc, 0x2, 0x3, 0x3, 0x2, 0x5, 0xa, 0x2, 0x4d, 
-    0x2, 0xe, 0x3, 0x2, 0x2, 0x2, 0x4, 0x10, 0x3, 0x2, 0x2, 0x2, 0x6, 0x1e, 
-    0x3, 0x2, 0x2, 0x2, 0x8, 0x20, 0x3, 0x2, 0x2, 0x2, 0xa, 0x24, 0x3, 0x2, 
-    0x2, 0x2, 0xc, 0x43, 0x3, 0x2, 0x2, 0x2, 0xe, 0xf, 0x5, 0x4, 0x3, 0x2, 
-    0xf, 0x3, 0x3, 0x2, 0x2, 0x2, 0x10, 0x11, 0x8, 0x3, 0x1, 0x2, 0x11, 
-    0x12, 0x5, 0x8, 0x5, 0x2, 0x12, 0x1b, 0x3, 0x2, 0x2, 0x2, 0x13, 0x14, 
-    0xc, 0x5, 0x2, 0x2, 0x14, 0x15, 0x7, 0x3, 0x2, 0x2, 0x15, 0x1a, 0x5, 
-    0x4, 0x3, 0x6, 0x16, 0x17, 0xc, 0x4, 0x2, 0x2, 0x17, 0x18, 0x7, 0x4, 
-    0x2, 0x2, 0x18, 0x1a, 0x5, 0x4, 0x3, 0x5, 0x19, 0x13, 0x3, 0x2, 0x2, 
-    0x2, 0x19, 0x16, 0x3, 0x2, 0x2, 0x2, 0x1a, 0x1d, 0x3, 0x2, 0x2, 0x2, 
-    0x1b, 0x19, 0x3, 0x2, 0x2, 0x2, 0x1b, 0x1c, 0x3, 0x2, 0x2, 0x2, 0x1c, 
-    0x5, 0x3, 0x2, 0x2, 0x2, 0x1d, 0x1b, 0x3, 0x2, 0x2, 0x2, 0x1e, 0x1f, 
-    0x7, 0x11, 0x2, 0x2, 0x1f, 0x7, 0x3, 0x2, 0x2, 0x2, 0x20, 0x21, 0x5, 
-    0x6, 0x4, 0x2, 0x21, 0x22, 0x5, 0xa, 0x6, 0x2, 0x22, 0x23, 0x5, 0xc, 
-    0x7, 0x2, 0x23, 0x9, 0x3, 0x2, 0x2, 0x2, 0x24, 0x25, 0x9, 0x2, 0x2, 
-    0x2, 0x25, 0xb, 0x3, 0x2, 0x2, 0x2, 0x26, 0x28, 0x7, 0xc, 0x2, 0x2, 
-    0x27, 0x29, 0x7, 0xb, 0x2, 0x2, 0x28, 0x27, 0x3, 0x2, 0x2, 0x2, 0x28, 
-    0x29, 0x3, 0x2, 0x2, 0x2, 0x29, 0x2b, 0x3, 0x2, 0x2, 0x2, 0x2a, 0x2c, 
-    0x7, 0xf, 0x2, 0x2, 0x2b, 0x2a, 0x3, 0x2, 0x2, 0x2, 0x2b, 0x2c, 0x3, 
-    0x2, 0x2, 0x2, 0x2c, 0x44, 0x3, 0x2, 0x2, 0x2, 0x2d, 0x2f, 0x7, 0xc, 
-    0x2, 0x2, 0x2e, 0x30, 0x7, 0xb, 0x2, 0x2, 0x2f, 0x2e, 0x3, 0x2, 0x2, 
-    0x2, 0x2f, 0x30, 0x3, 0x2, 0x2, 0x2, 0x30, 0x32, 0x3, 0x2, 0x2, 0x2, 
-    0x31, 0x33, 0x7, 0x10, 0x2, 0x2, 0x32, 0x31, 0x3, 0x2, 0x2, 0x2, 0x32, 
-    0x33, 0x3, 0x2, 0x2, 0x2, 0x33, 0x44, 0x3, 0x2, 0x2, 0x2, 0x34, 0x36, 
-    0x7, 0xd, 0x2, 0x2, 0x35, 0x37, 0x7, 0xb, 0x2, 0x2, 0x36, 0x35, 0x3, 
-    0x2, 0x2, 0x2, 0x36, 0x37, 0x3, 0x2, 0x2, 0x2, 0x37, 0x39, 0x3, 0x2, 
-    0x2, 0x2, 0x38, 0x3a, 0x7, 0xf, 0x2, 0x2, 0x39, 0x38, 0x3, 0x2, 0x2, 
-    0x2, 0x39, 0x3a, 0x3, 0x2, 0x2, 0x2, 0x3a, 0x44, 0x3, 0x2, 0x2, 0x2, 
-    0x3b, 0x3d, 0x7, 0xd, 0x2, 0x2, 0x3c, 0x3e, 0x7, 0xb, 0x2, 0x2, 0x3d, 
-    0x3c, 0x3, 0x2, 0x2, 0x2, 0x3d, 0x3e, 0x3, 0x2, 0x2, 0x2, 0x3e, 0x40, 
-    0x3, 0x2, 0x2, 0x2, 0x3f, 0x41, 0x7, 0x10, 0x2, 0x2, 0x40, 0x3f, 0x3, 
-    0x2, 0x2, 0x2, 0x40, 0x41, 0x3, 0x2, 0x2, 0x2, 0x41, 0x44, 0x3, 0x2, 
-    0x2, 0x2, 0x42, 0x44, 0x7, 0xe, 0x2, 0x2, 0x43, 0x26, 0x3, 0x2, 0x2, 
-    0x2, 0x43, 0x2d, 0x3, 0x2, 0x2, 0x2, 0x43, 0x34, 0x3, 0x2, 0x2, 0x2, 
-    0x43, 0x3b, 0x3, 0x2, 0x2, 0x2, 0x43, 0x42, 0x3, 0x2, 0x2, 0x2, 0x44, 
-    0xd, 0x3, 0x2, 0x2, 0x2, 0xd, 0x19, 0x1b, 0x28, 0x2b, 0x2f, 0x32, 0x36, 
-    0x39, 0x3d, 0x40, 0x43, 
-  };
-
-  atn::ATNDeserializer deserializer;
-  _atn = deserializer.deserialize(_serializedATN);
-
-  size_t count = _atn.getNumberOfDecisions();
-  _decisionToDFA.reserve(count);
-  for (size_t i = 0; i < count; i++) { 
-    _decisionToDFA.emplace_back(_atn.getDecisionState(i), i);
-  }
+void QueryParser::initialize() {
+#if ANTLR4_USE_THREAD_LOCAL_CACHE
+  queryParserInitialize();
+#else
+  ::antlr4::internal::call_once(queryParserOnceFlag, queryParserInitialize);
+#endif
 }
-
-QueryParser::Initializer QueryParser::_init;
