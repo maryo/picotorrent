@@ -75,7 +75,7 @@ std::string Environment::GetCrashpadReportUrl()
         return url;
     }
 
-    return "https://o314884.ingest.sentry.io/api/1794272/minidump/?sentry_key=722163e5427c4a8892d2c158b5ffe954";
+    return "https://f7333e6e20581d511541c73b1260b2bb@o4512158811357184.ingest.de.sentry.io/4512158823481424";
 }
 
 fs::path Environment::GetCoreDbFilePath()
