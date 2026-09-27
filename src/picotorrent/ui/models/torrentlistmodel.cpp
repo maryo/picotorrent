@@ -375,7 +375,11 @@ void TorrentListModel::GetValueByRow(wxVariant& variant, uint32_t row, uint32_t 
             break;
 
         case TorrentStatus::State::Error:
-            if (status.errorDetails.empty())
+            if (status.filesMissing)
+            {
+                variant = i18n("state_error_files_missing");
+            }
+            else if (status.errorDetails.empty())
             {
                 variant = fmt::format(
                     i18n("state_error"),

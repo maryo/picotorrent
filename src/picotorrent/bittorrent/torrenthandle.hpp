@@ -61,6 +61,7 @@ namespace BitTorrent
         void SetLabel(int id, std::string const& name, bool muted = false);
 
         void SetComment(std::string const& comment);
+        void SetFilesMissing(bool value);
 
         libtorrent::torrent_handle& WrappedHandle();
 
@@ -76,6 +77,7 @@ namespace BitTorrent
         int m_labelId;
         std::string m_labelName;
         std::string m_comment;
+        bool m_filesMissing = false;
     };
 }
 }

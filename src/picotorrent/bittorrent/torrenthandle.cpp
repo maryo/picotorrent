@@ -195,6 +195,7 @@ void TorrentHandle::RemoveFiles()
 
 void TorrentHandle::Resume()
 {
+    m_filesMissing = false;
     m_th->set_flags(lt::torrent_flags::auto_managed);
     m_th->clear_error();
     m_th->resume();
@@ -202,6 +203,7 @@ void TorrentHandle::Resume()
 
 void TorrentHandle::ResumeForce()
 {
+    m_filesMissing = false;
     m_th->unset_flags(lt::torrent_flags::auto_managed);
     m_th->clear_error();
     m_th->resume();
@@ -276,6 +278,11 @@ void TorrentHandle::SetComment(std::string const& comment)
     m_comment = comment;
 }
 
+void TorrentHandle::SetFilesMissing(bool value)
+{
+    m_filesMissing = value;
+}
+
 std::unique_ptr<TorrentStatus> TorrentHandle::Update(lt::torrent_status const& ts)
 {
     std::stringstream hash;
@@ -335,6 +342,7 @@ std::unique_ptr<TorrentStatus> TorrentHandle::Update(lt::torrent_status const& t
     nts.downloadPayloadRate = ts.download_payload_rate;
     nts.error = error;
     nts.errorDetails = error_details;
+    nts.filesMissing = m_filesMissing;
     nts.eta = eta;
     nts.forced = (!(ts.flags & lt::torrent_flags::paused) && !(ts.flags & lt::torrent_flags::auto_managed));
     nts.infoHash = hash.str();
@@ -353,7 +361,9 @@ std::unique_ptr<TorrentStatus> TorrentHandle::Update(lt::torrent_status const& t
     nts.savePath = ts.save_path;
     nts.seedsCurrent = ts.num_seeds;
     nts.seedsTotal = ts.list_seeds;
-    nts.state = getTorrentStatusState(ts);
+    nts.state = m_filesMissing
+        ? TorrentStatus::State::Error
+        : getTorrentStatusState(ts);
     nts.torrentFile = ts.torrent_file;
     nts.totalWanted = ts.total_wanted;
     nts.totalWantedRemaining = ts.total_wanted - ts.total_wanted_done;
