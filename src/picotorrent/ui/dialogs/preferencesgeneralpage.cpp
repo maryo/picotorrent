@@ -150,9 +150,16 @@ PreferencesGeneralPage::PreferencesGeneralPage(wxWindow* parent, std::shared_ptr
     
     m_theme->Append(i18n("follow_system_theme"), new ClientData<std::string>("system"));
     m_theme->Append(i18n("light_theme"), new ClientData<std::string>("light"));
-    if (m_cfg->Get<std::string>("theme_id").value_or("system") == "light")
+    m_theme->Append(i18n("dark_theme"), new ClientData<std::string>("dark"));
+
+    std::string const themeId = m_cfg->Get<std::string>("theme_id").value_or("system");
+    if (themeId == "light")
     {
         m_theme->SetSelection(1);
+    }
+    else if (themeId == "dark")
+    {
+        m_theme->SetSelection(2);
     }
     else
     {
