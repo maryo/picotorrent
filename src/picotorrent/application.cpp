@@ -8,6 +8,8 @@
 #include <wx/snglinst.h>
 #include <wx/taskbarbutton.h>
 
+#include <sentry.h>
+
 #include "api/libpico_impl.hpp"
 #include "crashpadinitializer.hpp"
 #include "persistencemanager.hpp"
@@ -33,6 +35,8 @@ Application::~Application()
     {
         delete plugin;
     }
+
+    sentry_close();
 }
 
 bool Application::OnCmdLineParsed(wxCmdLineParser& parser)
