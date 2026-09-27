@@ -1,5 +1,7 @@
 #include "torrentlistmodel.hpp"
 
+#include <Windows.h>
+
 #include <boost/log/trivial.hpp>
 #include <fmt/format.h>
 #include <fmt/xchar.h>
@@ -125,10 +127,22 @@ int TorrentListModel::Compare(const wxDataViewItem& item1, const wxDataViewItem&
 
     auto nameSort = [&hashSort](bool ascending, TorrentStatus const& l, TorrentStatus const& r) -> int
     {
-        auto compvalue = _strcmpi(l.name.c_str(),r.name.c_str());
-        if (compvalue < 0) { return ascending ? -1 : 1; }
-        else if (compvalue == 0) { return hashSort(ascending, l, l); }
-        else{ return ascending ? 1 : -1; }
+        // Use a locale-aware, case-insensitive comparison instead of the
+        // ASCII-only _strcmpi(), which sorts accented/non-Latin names
+        // incorrectly (it compares raw bytes, not characters).
+        std::wstring const lname = Utils::toStdWString(l.name);
+        std::wstring const rname = Utils::toStdWString(r.name);
+
+        int const result = CompareStringEx(
+            LOCALE_NAME_USER_DEFAULT,
+            NORM_IGNORECASE | SORT_DIGITSASNUMBERS,
+            lname.c_str(), static_cast<int>(lname.size()),
+            rname.c_str(), static_cast<int>(rname.size()),
+            NULL, NULL, 0);
+
+        if (result == CSTR_LESS_THAN) { return ascending ? -1 : 1; }
+        else if (result == CSTR_GREATER_THAN) { return ascending ? 1 : -1; }
+        else { return hashSort(ascending, l, r); }
     };
 
     switch (column)
@@ -174,10 +188,23 @@ int TorrentListModel::Compare(const wxDataViewItem& item1, const wxDataViewItem&
     }
     case Columns::ETA:
     {
-        if (lhs.eta < rhs.eta) { return ascending ? -1 : 1; }
-        if (lhs.eta > rhs.eta) { return ascending ? 1 : -1; }
-        if (lhs.eta == rhs.eta) { return hashSort(ascending, lhs, rhs); }
-        break;
+        // A torrent with no meaningful ETA (paused, seeding, or otherwise
+        // shown as "-") should always sort after torrents with a real ETA,
+        // regardless of sort direction - not as if it had the smallest
+        // possible value.
+        auto etaOrMax = [](std::chrono::seconds eta)
+        {
+            return eta.count() <= 0
+                ? std::chrono::seconds::max()
+                : eta;
+        };
+
+        auto lhsEta = etaOrMax(lhs.eta);
+        auto rhsEta = etaOrMax(rhs.eta);
+
+        if (lhsEta < rhsEta) { return ascending ? -1 : 1; }
+        if (lhsEta > rhsEta) { return ascending ? 1 : -1; }
+        return hashSort(ascending, lhs, rhs);
     }
     case Columns::DownloadSpeed:
     {
@@ -267,11 +294,6 @@ bool TorrentListModel::GetAttrByRow(unsigned int row, unsigned int col, wxDataVi
     return false;
 }
 
-wxString TorrentListModel::GetColumnType(unsigned int) const
-{
-    return "string";
-}
-
 unsigned int TorrentListModel::GetCount() const
 {
     return m_filtered.size();
@@ -353,7 +375,11 @@ void TorrentListModel::GetValueByRow(wxVariant& variant, uint32_t row, uint32_t 
             break;
 
         case TorrentStatus::State::Error:
-            if (status.errorDetails.empty())
+            if (status.filesMissing)
+            {
+                variant = i18n("state_error_files_missing");
+            }
+            else if (status.errorDetails.empty())
             {
                 variant = fmt::format(
                     i18n("state_error"),

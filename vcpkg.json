@@ -3,10 +3,13 @@
   "name": "picotorrent",
   "version-string": "1",
   "dependencies": [
+    "antlr4",
     "boost-log",
     "fmt",
     "libtorrent",
     "nlohmann-json",
-    "sqlite3"
+    "sentry-native",
+    "sqlite3",
+    "wxwidgets"
   ]
 }

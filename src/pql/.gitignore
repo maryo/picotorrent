@@ -1,4 +1,4 @@
 .antlr
-antlr-4.8-complete.jar
+antlr-*-complete.jar
 generated/*.interp
 generated/*.tokens

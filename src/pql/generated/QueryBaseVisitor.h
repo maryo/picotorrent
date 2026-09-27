@@ -1,5 +1,5 @@
 
-// Generated from .\Query.g4 by ANTLR 4.9
+// Generated from ./Query.g4 by ANTLR 4.13.2
 
 #pragma once
 
@@ -17,35 +17,35 @@ namespace pt::PQL {
 class  QueryBaseVisitor : public QueryVisitor {
 public:
 
-  virtual antlrcpp::Any visitFilter(QueryParser::FilterContext *ctx) override {
+  virtual std::any visitFilter(QueryParser::FilterContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitAndExpression(QueryParser::AndExpressionContext *ctx) override {
+  virtual std::any visitAndExpression(QueryParser::AndExpressionContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitPredicateExpression(QueryParser::PredicateExpressionContext *ctx) override {
+  virtual std::any visitPredicateExpression(QueryParser::PredicateExpressionContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOrExpression(QueryParser::OrExpressionContext *ctx) override {
+  virtual std::any visitOrExpression(QueryParser::OrExpressionContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitReference(QueryParser::ReferenceContext *ctx) override {
+  virtual std::any visitReference(QueryParser::ReferenceContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOperatorPredicate(QueryParser::OperatorPredicateContext *ctx) override {
+  virtual std::any visitOperatorPredicate(QueryParser::OperatorPredicateContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOper(QueryParser::OperContext *ctx) override {
+  virtual std::any visitOper(QueryParser::OperContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitValue(QueryParser::ValueContext *ctx) override {
+  virtual std::any visitValue(QueryParser::ValueContext *ctx) override {
     return visitChildren(ctx);
   }
 
