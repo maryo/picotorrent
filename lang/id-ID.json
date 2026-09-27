@@ -119,6 +119,7 @@
     "state_downloading_stalled": "Tersendat",
     "state_error": "Kesalahan: {0}",
     "state_error_details": "Kesalahan: {0} ({1})",
+    "state_error_files_missing": "Berkas hilang - Dijeda",
     "state_unknown": "Tidak diketahui",
     "state_uploading": "Membagikan",
     "state_uploading_checking": "Memeriksa",
@@ -238,7 +239,7 @@
     "label": "Label",
     "component": "Komponen",
     "version": "Versi",
-    "commitish": "Commitish",
+    "commitish": "Commit",
     "private": "Privat",
     "last_download": "Unduh terakhir",
     "last_upload": "Unggah terakhir",
@@ -301,6 +302,10 @@
     "ip_filter_enabled": "Filter IP: ✔️",
     "ip_filter_disabled": "Filter IP: ❌",
     "seed_mode": "Mode berbagi",
-    "copyright_text": "© 2015-2021",
-    "leeches": "Pengunduh"
+    "copyright_text": "© 2015-2026",
+    "leeches": "Pengunduh",
+    "theme": "Tema",
+    "light_theme": "Terang",
+    "dark_theme": "Gelap",
+    "follow_system_theme": "Sistem"
 }

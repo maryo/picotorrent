@@ -109,6 +109,7 @@
     "state_downloading_queued": "Jonossa",
     "state_downloading_stalled": "Odotetaan",
     "state_error": "Virhe: {0}",
+    "state_error_files_missing": "Tiedostoja puuttuu - Keskeytetty",
     "state_unknown": "Tuntematon",
     "state_uploading": "Jaetaan",
     "state_uploading_checking": "Tarkistetaan",
@@ -206,5 +207,12 @@
     "start_torrent": "Käynnistä torrentti",
     "auto_managed": "Hallitse automaattisesti",
     "copy": "Kopioi",
-    "options": "Asetukset"
+    "options": "Asetukset",
+    "theme": "Teema",
+    "light_theme": "Vaalea",
+    "dark_theme": "Tumma",
+    "follow_system_theme": "Järjestelmä",
+    "commitish": "Commit",
+    "component": "Komponentti",
+    "version": "Versio"
 }

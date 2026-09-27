@@ -97,6 +97,7 @@
     "state_downloading_stalled": "مؤجل",
     "state_error": "خطأ:{0}",
     "state_error_details": "خطأ:{0} ({1})",
+    "state_error_files_missing": "الملفات مفقودة - متوقف مؤقتًا",
     "state_unknown": "مجهول",
     "state_uploading": "الزرع",
     "state_uploading_checking": "التحقق",
@@ -198,7 +199,7 @@
     "label": "ملصق أو طابع",
     "component": "عنصر",
     "version": "النسخة",
-    "commitish": "ملزم",
+    "commitish": "Commit",
     "private": "خاص",
     "last_upload": "رفع سابق",
     "last_activity_just_now": "حتى الآن",
@@ -301,5 +302,9 @@
     "ip_filter_enabled": "فلتر الIP: ✔️",
     "ip_filter_disabled": "فلتر الIP: ❌",
     "ip_filter": "فلتر الIP",
-    "leeches": "المتطفلون"
+    "leeches": "المتطفلون",
+    "theme": "المظهر",
+    "light_theme": "فاتح",
+    "dark_theme": "داكن",
+    "follow_system_theme": "النظام"
 }

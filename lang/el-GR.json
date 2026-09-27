@@ -226,6 +226,7 @@
     "browse": "…",
     "http": "HTTP",
     "state_error_details": "Σφάλμα: {0} ({1}",
+    "state_error_files_missing": "Λείπουν αρχεία - Παύση",
     "num_torrents": "{0} torrents(s)",
     "no": "Όχι",
     "private": "Προσωπικό",
@@ -260,7 +261,7 @@
     "updating": "Γίνεται ενημέρωση",
     "last_activity_just_now": "Μόλις τώρα",
     "component": "Συστατικό",
-    "commitish": "Δέσμευση",
+    "commitish": "Commit",
     "last_upload": "Τελευταία αναφόρτωση",
     "last_activity_unknown": "Κανένα",
     "select_file": "Επιλογή αρχείου",
@@ -287,5 +288,9 @@
     "mode": "Τρόπος",
     "trackers_input_per_line": "Trackers (ένας ανά γραμμή)",
     "url_seeds_input_per_line": "URL μεταφορτωτές (ένα ανά γραμμή)",
-    "restore_defaults_description": "Θα γίνει επαναφορά στις προεπιλεγμένες ρυθμίσεις. Είσαι σίγουρος;"
+    "restore_defaults_description": "Θα γίνει επαναφορά στις προεπιλεγμένες ρυθμίσεις. Είσαι σίγουρος;",
+    "theme": "Θέμα",
+    "light_theme": "Ανοιχτό",
+    "dark_theme": "Σκούρο",
+    "follow_system_theme": "Σύστημα"
 }

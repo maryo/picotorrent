@@ -123,7 +123,7 @@
     "documentation": "Dokumentatsioon",
     "restore_defaults_description": "See taastab enamus sätteid tava peale. Kas olete kindel?",
     "export": "Ekspordi",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "select_ip_filter_file": "Vali IP filtri fail",
     "file_filter_all_files": "Kõik failid (*.*)|*.*",
     "ip_filter_enabled": "IP filter: ✔️",
@@ -167,5 +167,12 @@
     "require_encryption_incoming": "Nõua sissetulevatel ühendustel",
     "confirm_remove_description": "See eemaldab allalaaditud failid sellest torrentist.",
     "proxy_tracker_connections": "Proxy jälitajate ühendused",
-    "only_move_from_default_save_path": "Liiguta ainult tava salvestuse asukohast"
+    "only_move_from_default_save_path": "Liiguta ainult tava salvestuse asukohast",
+    "theme": "Teema",
+    "light_theme": "Hele",
+    "dark_theme": "Tume",
+    "follow_system_theme": "Süsteem",
+    "state_error_files_missing": "Failid puuduvad - Pausitud",
+    "component": "Komponent",
+    "commitish": "Commit"
 }

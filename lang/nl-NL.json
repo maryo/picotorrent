@@ -263,7 +263,7 @@
     "label": "Label",
     "component": "Component",
     "version": "Versie",
-    "commitish": "Commitish",
+    "commitish": "Commit",
     "private": "Privé",
     "last_download": "Laatst gedownload",
     "last_upload": "Laatst geüpload",
@@ -286,6 +286,7 @@
     "status_hashing_piece": "Hashing deel {0} van {1}",
     "i2p": "I2P",
     "state_error_details": "Fout: {0} ({1})",
+    "state_error_files_missing": "Bestanden ontbreken - Gepauzeerd",
     "eta_hms_format": "{0}u {1}m {2}s",
     "eta_ms_format": "{0}m {1}s",
     "eta_s_format": "{0}s",
@@ -304,8 +305,12 @@
     "tier": "Rang",
     "amp_console": "C&onsole",
     "all_torrents_already_in_session": "Geen torrents toevoegen, aangezien deze al zijn toegevoegd …",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "export": "Exporteren",
     "torrent_file_s": "Torrentbestand(en)",
-    "exported_magnet_link_s": "Geëxporteerde magnetlinks"
+    "exported_magnet_link_s": "Geëxporteerde magnetlinks",
+    "theme": "Thema",
+    "light_theme": "Licht",
+    "dark_theme": "Donker",
+    "follow_system_theme": "Systeem"
 }

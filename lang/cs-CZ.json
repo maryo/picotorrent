@@ -99,7 +99,7 @@
     "apply_filter": "Použít filtr",
     "availability": "Dostupnost",
     "version": "Verze",
-    "commitish": "Závazky",
+    "commitish": "Commit",
     "private": "Soukromé",
     "last_download": "Poslední stažení",
     "last_activity_just_now": "právě teď",
@@ -138,7 +138,7 @@
     "low": "Nízké",
     "do_not_download": "Nestahovat",
     "priority": "Priorita",
-    "save_path": "Uložit cestu",
+    "save_path": "Stahuji do",
     "add_torrent_s": "Přidat torrent(y)",
     "picotorrent_description": "Vytvořeno s láskou, pomocí Boost, Rasterbar-libtorrent, OpenSSL a wxWidgets.",
     "downloads": "Stažené",
@@ -185,6 +185,7 @@
     "state_downloading_queued": "Ve frontě",
     "state_error": "Chyba: {0}",
     "state_error_details": "Chyba: {0} ({1})",
+    "state_error_files_missing": "Chybí soubory - pozastaveno",
     "state_unknown": "Neznámý",
     "state_uploading": "Odesílám",
     "state_uploading_paused": "Hotovo",
@@ -222,5 +223,9 @@
     "notification_area": "Panel nástrojů",
     "minimize_to_notification_area": "Minimlizovat do panelu nástrojů",
     "close_to_notification_area": "Zavřít do panelu nástrojů",
-    "info_hash": "Hash informace"
+    "info_hash": "Hash informace",
+    "theme": "Motiv",
+    "light_theme": "Světlý",
+    "dark_theme": "Tmavý",
+    "follow_system_theme": "Systémový"
 }

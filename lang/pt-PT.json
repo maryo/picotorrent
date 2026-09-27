@@ -81,5 +81,13 @@
     "picotorrent_description": "Criado com amor, usando Boost, Rasterbar-libtorrent, OpenSSL and wxWidgets.",
     "username": "Nome de utilizador",
     "the_transfers_path_cannot_be_empty": "O destino das transferências não pode estar vazio.",
-    "max_connections": "Máximo de conexões"
+    "max_connections": "Máximo de conexões",
+    "theme": "Tema",
+    "light_theme": "Claro",
+    "dark_theme": "Escuro",
+    "follow_system_theme": "Sistema",
+    "state_error_files_missing": "Ficheiros em falta - Pausado",
+    "commitish": "Commit",
+    "component": "Componente",
+    "version": "Versão"
 }

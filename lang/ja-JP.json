@@ -92,6 +92,7 @@
     "state_downloading_queued": "キューに",
     "state_error": "エラー: {0}",
     "state_error_details": "エラー: {0} ({1})",
+    "state_error_files_missing": "ファイルが見つかりません - 一時停止",
     "state_unknown": "未知",
     "state_uploading": "シーディング",
     "state_uploading_paused": "完成した",
@@ -114,5 +115,12 @@
     "top": "トップ",
     "bottom": "下",
     "language": "言語",
-    "add_tracker": "トラッカーを加える"
+    "add_tracker": "トラッカーを加える",
+    "theme": "テーマ",
+    "light_theme": "ライト",
+    "dark_theme": "ダーク",
+    "follow_system_theme": "システム",
+    "commitish": "コミット",
+    "component": "コンポーネント",
+    "version": "バージョン"
 }

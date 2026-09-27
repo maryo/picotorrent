@@ -105,6 +105,7 @@
     "state_downloading_queued": "대기",
     "state_downloading_stalled": "정지",
     "state_error": "오류: {0}",
+    "state_error_files_missing": "파일 누락 - 일시정지",
     "state_unknown": "알 수 없음",
     "state_uploading": "시딩",
     "state_uploading_checking": "확인",
@@ -175,5 +176,12 @@
     "show_picotorrent_in_notification_area": "PicoTorrent 알림 영역에 보이기",
     "minimize_to_notification_area": "최소화 시 알림 영역으로 이동",
     "close_to_notification_area": "닫으면 알림 영역으로 이동",
-    "options": "옵션"
+    "options": "옵션",
+    "theme": "테마",
+    "light_theme": "라이트",
+    "dark_theme": "다크",
+    "follow_system_theme": "시스템",
+    "commitish": "커밋",
+    "component": "구성 요소",
+    "version": "버전"
 }

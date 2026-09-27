@@ -1,4 +1,4 @@
-﻿{
+{
     "name": "Nombre",
     "size": "Tamaño",
     "status": "Estado",
@@ -188,6 +188,7 @@
     "_torrent_s": "{0} torrent(s)",
     "state_error": "Error: {0}",
     "state_error_details": "Error: {0} ({1})",
+    "state_error_files_missing": "Faltan archivos - Pausado",
     "general": "General",
     "verified": "Verificado",
     "force_recheck": "Forzar verificación",
@@ -264,7 +265,7 @@
     "status_s": "Estado: {0}",
     "restore_defaults": "Predeterminado",
     "status_hashing_piece": "Pieza hash {0} de {1}",
-    "commitish": "Consolidado",
+    "commitish": "Commit",
     "queue_position": "#",
     "skip_add_torrent_dialog": "Omitir cuadro de diálogo \"Agregar torrent\"",
     "added_on": "Añadido el",
@@ -303,5 +304,9 @@
     "ip_filter": "Filtro de IP",
     "ip_filter_disabled": "Filtro de IP: ❌",
     "ip_filter_enabled": "Filtro de IP: ✔️",
-    "select_ip_filter_file": "Seleccionar archivo de filtro de IP"
+    "select_ip_filter_file": "Seleccionar archivo de filtro de IP",
+    "theme": "Tema",
+    "light_theme": "Claro",
+    "dark_theme": "Oscuro",
+    "follow_system_theme": "Sistema"
 }

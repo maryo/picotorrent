@@ -119,6 +119,7 @@
     "state_downloading_stalled": "Ожидание",
     "state_error": "Ошибка: {0}",
     "state_error_details": "Ошибка: {0} ({1})",
+    "state_error_files_missing": "Файлы отсутствуют - Приостановлено",
     "state_unknown": "Неизвестно",
     "state_uploading": "Раздаётся",
     "state_uploading_checking": "Проверка",
@@ -302,8 +303,12 @@
     "amp_console": "&Консоль",
     "all_torrents_already_in_session": "Уже добавленные торренты не были добавлены…",
     "some_torrents_already_in_session": "Пропускаем торренты добавленные ранее…",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "exported_magnet_link_s": "Экспортированные Magnet-сслыки",
     "export": "Экспортировать",
-    "torrent_file_s": "Торрент-файл(ы)"
+    "torrent_file_s": "Торрент-файл(ы)",
+    "theme": "Тема",
+    "light_theme": "Светлая",
+    "dark_theme": "Тёмная",
+    "follow_system_theme": "Системная"
 }

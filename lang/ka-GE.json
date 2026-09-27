@@ -105,6 +105,7 @@
     "state_downloading_queued": "რიგშია",
     "state_downloading_stalled": "დაყოვნებული",
     "state_error": "შეცდომა: {0}",
+    "state_error_files_missing": "ფაილები აკლია - დაპაუზებული",
     "state_unknown": "უცნობი",
     "state_uploading": "სიდირდება",
     "state_uploading_checking": "მოწმდება",
@@ -144,5 +145,12 @@
     "socks5": "SOCKS5",
     "ip": "IP",
     "queue_position": "#",
-    "browse": "…"
+    "browse": "…",
+    "theme": "თემა",
+    "light_theme": "ღია",
+    "dark_theme": "მუქი",
+    "follow_system_theme": "სისტემა",
+    "commitish": "Commit",
+    "component": "კომპონენტი",
+    "version": "ვერსია"
 }

@@ -165,5 +165,13 @@
     "apply": "Aplica",
     "maximized": "Maximitzat",
     "no_magnet_links_found": "Cap enllaç magnet trobat",
-    "options": "Pcions"
+    "options": "Pcions",
+    "theme": "Tema",
+    "light_theme": "Clar",
+    "dark_theme": "Fosc",
+    "follow_system_theme": "Sistema",
+    "state_error_files_missing": "Falten fitxers - Pausat",
+    "commitish": "Commit",
+    "component": "Component",
+    "version": "Versió"
 }

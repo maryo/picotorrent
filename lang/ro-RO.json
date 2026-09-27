@@ -100,6 +100,7 @@
     "state_downloading_queued": "În așteptare",
     "state_downloading_stalled": "Blocat",
     "state_error": "Eroare: {0}",
+    "state_error_files_missing": "Fișiere lipsă - Întrerupt",
     "state_unknown": "Necunoscut",
     "state_uploading": "Însămânțând",
     "state_uploading_checking": "Verificând",
@@ -163,5 +164,12 @@
     "apply": "Aplică",
     "maximized": "Maximizat",
     "no_magnet_links_found": "Nici un magnet link găsit",
-    "options": "Opțiuni"
+    "options": "Opțiuni",
+    "theme": "Temă",
+    "light_theme": "Deschisă",
+    "dark_theme": "Întunecată",
+    "follow_system_theme": "Sistem",
+    "commitish": "Commit",
+    "component": "Componentă",
+    "version": "Versiune"
 }
