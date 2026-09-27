@@ -198,9 +198,10 @@ void TorrentDetailsOverviewPanel::Refresh(pt::BitTorrent::TorrentHandle* torrent
     m_totalUpload->SetLabel(
         Utils::toHumanFileSize(status.allTimeUpload));
 
+    m_comment->SetLabel(status.comment);
+
     if (auto tf = status.torrentFile.lock())
     {
-        m_comment->SetLabel(tf->comment());
         m_priv->SetLabel(
             tf->priv()
             ? i18n("yes")

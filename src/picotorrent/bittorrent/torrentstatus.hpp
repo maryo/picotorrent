@@ -42,6 +42,7 @@ namespace BitTorrent
         wxDateTime                                            completedOn;
         int                                                   downloadPayloadRate;
         bool                                                  forced;
+        std::string                                           comment;
         std::string                                           error;
         std::string                                           errorDetails;
         std::chrono::seconds                                  eta;

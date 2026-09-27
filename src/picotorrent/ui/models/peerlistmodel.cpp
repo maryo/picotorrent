@@ -34,7 +34,7 @@ void PeerListModel::Update(std::vector<lt::peer_info> const& peers)
             peers.end(),
             [it](lt::peer_info const& p)
             {
-                return p.ip == it->ip;
+                return p.remote_endpoint() == it->remote_endpoint();
             });
 
         if (f == peers.end())
@@ -52,7 +52,7 @@ void PeerListModel::Update(std::vector<lt::peer_info> const& peers)
 
     for (auto it = peers.begin(); it != peers.end(); it++)
     {
-        auto f = std::find_if(m_data.begin(), m_data.end(), [it](lt::peer_info& p) { return p.ip == it->ip; });
+        auto f = std::find_if(m_data.begin(), m_data.end(), [it](lt::peer_info& p) { return p.remote_endpoint() == it->remote_endpoint(); });
 
         if (f == m_data.end())
         {
@@ -85,7 +85,7 @@ void PeerListModel::GetValueByRow(wxVariant &variant, unsigned int row, unsigned
     switch (col)
     {
     case Column::IP:
-        variant = peer.ip.address().to_string();
+        variant = peer.remote_endpoint().address().to_string();
         break;
     case Column::Client:
         variant = wxString::FromUTF8(peer.client);

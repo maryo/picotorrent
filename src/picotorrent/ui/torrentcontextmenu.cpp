@@ -5,6 +5,7 @@
 
 #include <libtorrent/create_torrent.hpp>
 #include <libtorrent/magnet_uri.hpp>
+#include <libtorrent/write_resume_data.hpp>
 #include <wx/clipbrd.h>
 
 #include "../bittorrent/torrenthandle.hpp"
@@ -157,7 +158,7 @@ TorrentContextMenu::TorrentContextMenu(wxWindow* parent, std::shared_ptr<pt::Cor
 
             for (auto torrent : selectedTorrents)
             {
-                ss << lt::make_magnet_uri(torrent->WrappedHandle()) << "\n";
+                ss << lt::make_magnet_uri(torrent->WrappedHandle().get_resume_data()) << "\n";
             }
 
             TextOutputDialog dlg(m_parent, wxID_ANY, i18n("magnet_link_s"), i18n("exported_magnet_link_s"));
@@ -185,12 +186,13 @@ TorrentContextMenu::TorrentContextMenu(wxWindow* parent, std::shared_ptr<pt::Cor
 
             for (auto torrent : selectedTorrents)
             {
-                if (auto tf = torrent->WrappedHandle().torrent_file_with_hashes())
-                {
-                    lt::create_torrent ct(*tf.get());
-                    lt::entry e = ct.generate();
+                lt::add_torrent_params atp = torrent->WrappedHandle().get_resume_data();
 
-                    std::string fileName = tf->name() + ".torrent";
+                if (atp.ti)
+                {
+                    lt::entry e = lt::write_torrent_file(atp);
+
+                    std::string fileName = atp.ti->name() + ".torrent";
                     std::ofstream out(outputDir / fileName, std::ios::binary);
                     lt::bencode(std::ostreambuf_iterator<char>(out), e);
                 }

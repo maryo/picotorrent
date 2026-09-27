@@ -56,7 +56,8 @@ Task("Generate-Project")
             $"-DGITVERSION_VAR_VERSION_MINOR={Version.Minor}",
             $"-DGITVERSION_VAR_VERSION_PATCH={Version.Patch}",
             $"-DGITVERSION_VAR_VERSION={Version.MajorMinorPatch}",
-            $"-DVCPKG_TARGET_TRIPLET={vcpkgTriplet}"
+            $"-DVCPKG_TARGET_TRIPLET={vcpkgTriplet}",
+            $"-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
         }
     });
 });

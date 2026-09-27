@@ -271,6 +271,11 @@ void TorrentHandle::SetLabel(int id, std::string const& name, bool muted)
     }
 }
 
+void TorrentHandle::SetComment(std::string const& comment)
+{
+    m_comment = comment;
+}
+
 std::unique_ptr<TorrentStatus> TorrentHandle::Update(lt::torrent_status const& ts)
 {
     std::stringstream hash;
@@ -317,7 +322,7 @@ std::unique_ptr<TorrentStatus> TorrentHandle::Update(lt::torrent_status const& t
 
         if (ts.error_file >= lt::file_index_t{ 0 } && ti)
         {
-            error_details = ti->files().file_path(ts.error_file);
+            error_details = ti->layout().file_path(ts.error_file);
         }
     }
 
@@ -333,6 +338,7 @@ std::unique_ptr<TorrentStatus> TorrentHandle::Update(lt::torrent_status const& t
     nts.eta = eta;
     nts.forced = (!(ts.flags & lt::torrent_flags::paused) && !(ts.flags & lt::torrent_flags::auto_managed));
     nts.infoHash = hash.str();
+    nts.comment = m_comment;
     nts.labelName = m_labelName;
     nts.lastDownload = ts.last_download.time_since_epoch().count() > 0 ? std::chrono::seconds(lt::total_seconds(lt::clock_type::now() - ts.last_download)) : std::chrono::seconds(-1);
     nts.lastUpload = ts.last_upload.time_since_epoch().count() > 0 ? std::chrono::seconds(lt::total_seconds(lt::clock_type::now() - ts.last_upload)) : std::chrono::seconds(-1);

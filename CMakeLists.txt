@@ -167,7 +167,7 @@ target_compile_definitions(
     PRIVATE
     -D_UNICODE
     -D_WIN32
-    -D_WIN32_WINNT=0x0600
+    -D_WIN32_WINNT=0x0602
     -DNOMINMAX
     -DPICOJSON_USE_INT64
     -DUNICODE
