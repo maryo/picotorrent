@@ -46,6 +46,10 @@ AboutDialog::AboutDialog(wxWindow* parent, wxWindowID id)
         << NLOHMANN_JSON_VERSION_MINOR << "."
         << NLOHMANN_JSON_VERSION_PATCH;
 
+    lv->InsertItem(lv->GetItemCount(), "PicoTorrent");
+    lv->SetItem(lv->GetItemCount() - 1, 1, BuildInfo::semver());
+    lv->SetItem(lv->GetItemCount() - 1, 2, BuildInfo::commitish());
+
     lv->InsertItem(lv->GetItemCount(), "Boost");
     lv->SetItem(lv->GetItemCount() - 1, 1, boostVersion.str());
     lv->SetItem(lv->GetItemCount() - 1, 2, "-");
@@ -58,13 +62,9 @@ AboutDialog::AboutDialog(wxWindow* parent, wxWindowID id)
     lv->SetItem(lv->GetItemCount() - 1, 1, nljson.str());
     lv->SetItem(lv->GetItemCount() - 1, 2, "-");
 
-    lv->InsertItem(lv->GetItemCount(), OPENSSL_VERSION_TEXT);
-    lv->SetItem(lv->GetItemCount() - 1, 1, "-");
+    lv->InsertItem(lv->GetItemCount(), "OpenSSL");
+    lv->SetItem(lv->GetItemCount() - 1, 1, OPENSSL_VERSION_STR);
     lv->SetItem(lv->GetItemCount() - 1, 2, "-");
-
-    lv->InsertItem(lv->GetItemCount(), "PicoTorrent");
-    lv->SetItem(lv->GetItemCount() - 1, 1, BuildInfo::semver());
-    lv->SetItem(lv->GetItemCount() - 1, 2, BuildInfo::commitish());
 
     lv->InsertItem(lv->GetItemCount(), "Rasterbar-libtorrent");
     lv->SetItem(lv->GetItemCount() - 1, 1, LIBTORRENT_VERSION);
