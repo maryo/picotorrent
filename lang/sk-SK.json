@@ -75,6 +75,7 @@
     "state_downloading_queued": "Vo fronte",
     "state_error": "Chyba: {0}",
     "state_error_details": "Chyba: {0} ({1})",
+    "state_error_files_missing": "Chýbajú súbory - Pozastavené",
     "state_unknown": "Neznámy",
     "state_uploading": "Odosielanie",
     "state_uploading_queued": "Vo fronte",
@@ -164,7 +165,7 @@
     "how_to_create_torrents": "Ako vytvoriť torrenty",
     "status_s": "Status: {0}",
     "status_ready": "Pripravený",
-    "commitish": "Záväzky",
+    "commitish": "Commit",
     "amp_details_panel": "Po&drobnosti",
     "status_select_file_or_directory": "Zvoľte súbor alebo priečinok",
     "status_adding_files": "Pridávanie súborov do úložiska",
@@ -223,9 +224,13 @@
     "create_torrent": "Vytvoriť torrent",
     "url_seeds_input_per_line": "URL odosielajúcich (jeden na riadok)",
     "amp_check_for_update": "Skontrolovať &aktualizácie",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "export": "Exportovať",
     "magnet_link_s": "Link(y) magnetu",
     "torrent_file_s": "Súbory torrentu",
-    "exported_magnet_link_s": "Exportované linky magnetu"
+    "exported_magnet_link_s": "Exportované linky magnetu",
+    "theme": "Motív",
+    "light_theme": "Svetlý",
+    "dark_theme": "Tmavý",
+    "follow_system_theme": "Systémový"
 }

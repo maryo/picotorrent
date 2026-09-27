@@ -105,6 +105,7 @@
     "state_downloading_queued": "Ierindots",
     "state_downloading_stalled": "Apstājies",
     "state_error": "Kļūda: {0}",
+    "state_error_files_missing": "Trūkst failu - Pauzēts",
     "state_unknown": "Nezināms",
     "state_uploading": "Dod",
     "state_uploading_checking": "Pārbauda",
@@ -119,5 +120,12 @@
     "prompt_restart_title": "Nepieciešama restartēšana",
     "add_torrent": "Pievienot torrentu",
     "exit": "Iziet",
-    "details": "Detaļas"
+    "details": "Detaļas",
+    "theme": "Tēma",
+    "light_theme": "Gaiša",
+    "dark_theme": "Tumša",
+    "follow_system_theme": "Sistēmas",
+    "commitish": "Commit",
+    "component": "Komponente",
+    "version": "Versija"
 }

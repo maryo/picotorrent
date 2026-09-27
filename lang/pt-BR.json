@@ -204,7 +204,7 @@
     "label": "Etiqueta",
     "component": "Componente",
     "version": "Versão",
-    "commitish": "Commitado",
+    "commitish": "Commit",
     "private": "Privado",
     "last_download": "Último download",
     "last_upload": "Último upload",
@@ -229,6 +229,7 @@
     "downloads": "Downloads",
     "ip": "IP",
     "state_error_details": "Erro: {0} ({1})",
+    "state_error_files_missing": "Arquivos ausentes - Pausado",
     "restart_picotorrent": "Reiniciar PicoTorrent",
     "_torrent_s": "{0} Torrent(s)",
     "queue_position": "#",
@@ -304,8 +305,12 @@
     "ip_filter_disabled": "Filtro de IP: ❌",
     "ip_filter": "Filtro de IP",
     "select_ip_filter_file": "Selecione um arquivo de filtro de IP",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "export": "Exportar",
     "torrent_file_s": "Arquivo(s) torrent(s)",
-    "exported_magnet_link_s": "Link(s) magnéticos exportados"
+    "exported_magnet_link_s": "Link(s) magnéticos exportados",
+    "theme": "Tema",
+    "light_theme": "Claro",
+    "dark_theme": "Escuro",
+    "follow_system_theme": "Sistema"
 }

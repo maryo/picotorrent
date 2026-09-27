@@ -119,6 +119,7 @@
     "state_downloading_stalled": "Очікування",
     "state_error": "Помилка: {0}",
     "state_error_details": "Помилка: {0} ({1})",
+    "state_error_files_missing": "Файли відсутні - Призупинено",
     "state_unknown": "Невідомо",
     "state_uploading": "Роздача",
     "state_uploading_checking": "Перевірка",
@@ -301,5 +302,9 @@
     "ip_filter_disabled": "Фільтр IP-адрес: ❌",
     "leeches": "Лічі",
     "some_torrents_already_in_session": "Один або декілька торрентів пропущено, оскільки вони були додані раніше…",
-    "all_torrents_already_in_session": "Усі торренти пропущено, оскільки вони були додані раніше…"
+    "all_torrents_already_in_session": "Усі торренти пропущено, оскільки вони були додані раніше…",
+    "theme": "Тема",
+    "light_theme": "Світла",
+    "dark_theme": "Темна",
+    "follow_system_theme": "Системна"
 }

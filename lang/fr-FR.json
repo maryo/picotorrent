@@ -119,6 +119,7 @@
     "state_downloading_stalled": "Bloqué",
     "state_error": "Erreur : {0}",
     "state_error_details": "Erreur : {0} ({1})",
+    "state_error_files_missing": "Fichiers manquants - Interrompu",
     "state_unknown": "Inconnu",
     "state_uploading": "Partage",
     "state_uploading_checking": "Vérification",
@@ -239,7 +240,7 @@
     "label": "Étiquette",
     "component": "Composant",
     "version": "Version",
-    "commitish": "Commitish",
+    "commitish": "Commit",
     "private": "Privé",
     "last_download": "Dernier téléchargement",
     "last_upload": "Dernier partage",
@@ -304,8 +305,12 @@
     "ip_filter_disabled": "Filtrage IP : ❌",
     "select_ip_filter_file": "Sélectionner le fichier de filtre IP",
     "file_filter_all_files": "Tous les fichiers (*.*)|*.*",
-    "copyright_text": "©2015-2021",
+    "copyright_text": "©2015-2026",
     "exported_magnet_link_s": "Lien(s) magnet exporté(s)",
     "export": "Exporter",
-    "torrent_file_s": "Fichier(s) torrent"
+    "torrent_file_s": "Fichier(s) torrent",
+    "theme": "Thème",
+    "light_theme": "Clair",
+    "dark_theme": "Sombre",
+    "follow_system_theme": "Système"
 }

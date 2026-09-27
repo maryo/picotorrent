@@ -102,6 +102,7 @@
     "state_downloading_queued": "I kø",
     "state_error": "Feil: {0}",
     "state_error_details": "Feil: {0} ({1})",
+    "state_error_files_missing": "Filer mangler - Satt på pause",
     "state_unknown": "Ukjent",
     "state_uploading": "Deler",
     "state_uploading_checking": "Sjekker",
@@ -225,7 +226,7 @@
     "compatibility": "Kompabilitet",
     "remove_tier": "Fjern nivå",
     "tier_n": "Nivå #{0}",
-    "commitish": "Innsendelses-sjekksum",
+    "commitish": "Commit",
     "mode_v1": "v1",
     "mode_v2": "v2",
     "mode_hybrid": "v1 + v2 hybrid",
@@ -303,5 +304,9 @@
     "ip_filter_enabled": "IP-filter: ✔️",
     "ip_filter_disabled": "IP-filter: ❌",
     "leeches": "Hentere",
-    "all_torrents_already_in_session": "Hopper over alle torrentene, siden de er lagt til allerede"
+    "all_torrents_already_in_session": "Hopper over alle torrentene, siden de er lagt til allerede",
+    "theme": "Tema",
+    "light_theme": "Lys",
+    "dark_theme": "Mørk",
+    "follow_system_theme": "System"
 }

@@ -88,6 +88,7 @@
     "state_downloading_stalled": "Затлачен",
     "state_error": "Грешка: {0}",
     "state_error_details": "Грешка: {0} ({1})",
+    "state_error_files_missing": "Липсват файлове - На пауза",
     "state_unknown": "Неизвестно",
     "url": "URL",
     "state_uploading": "Раздаване",
@@ -274,7 +275,7 @@
     "url_seeds_input_per_line": "Адреси на раздаващи (по един на ред)",
     "remove_tier": "Изтриване на приоритет",
     "tier_n": "Приоритет  {0}",
-    "commitish": "Къмит",
+    "commitish": "Commit",
     "apply_filter": "Прилагане на филтър",
     "restore_defaults_description": "Така ще бъдат възстановени по подразбиране повечето настройки. Сигурни ли сте?",
     "use_label_color_as_background_in_torrent_list": "Използване на етикет като фон в списъка с торенти",
@@ -297,8 +298,12 @@
     "ip_filter_disabled": "Ф по IP: ❌",
     "ip_filter": "Филтриране по адрес на IP",
     "file_filter_all_files": "Всички файлове (*.*)|*.*",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "export": "Изнасяне",
     "torrent_file_s": "Файл на торент",
-    "exported_magnet_link_s": "Изнесени магнитни препратки"
+    "exported_magnet_link_s": "Изнесени магнитни препратки",
+    "theme": "Тема",
+    "light_theme": "Светла",
+    "dark_theme": "Тъмна",
+    "follow_system_theme": "Системна"
 }

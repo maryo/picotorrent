@@ -18,6 +18,7 @@
     "state_downloading_paused": "מושהה",
     "state_error": "שגיאה: {0}",
     "state_error_details": "שגיאה: {0} ({1})",
+    "state_error_files_missing": "קבצים חסרים - מושהה",
     "state_unknown": "לא ידוע",
     "state_uploading_paused": "הושלם",
     "state_uploading_queued": "נוסף לתור",
@@ -154,7 +155,7 @@
     "label": "תווית",
     "component": "רכיב",
     "version": "גרסה",
-    "commitish": "מתחייב",
+    "commitish": "Commit",
     "private": "פרטי",
     "last_download": "הורדה אחרונה",
     "last_upload": "העלאה אחרונה",
@@ -222,5 +223,9 @@
     "ip_filter": "מסנן IP",
     "select_ip_filter_file": "בחר קובץ מסנן IP",
     "file_filter_all_files": "כל הקבצים (*.*)|*.*",
-    "ip_filter_enabled": "מסנן IP: ✔️"
+    "ip_filter_enabled": "מסנן IP: ✔️",
+    "theme": "ערכת נושא",
+    "light_theme": "בהיר",
+    "dark_theme": "כהה",
+    "follow_system_theme": "מערכת"
 }

@@ -93,6 +93,7 @@
     "state_downloading_stalled": "ठप",
     "state_error": "त्रुटि: {0}",
     "state_error_details": "त्रुटि: {0} ({1})",
+    "state_error_files_missing": "फ़ाइलें गुम हैं - रोका गया",
     "state_unknown": "अज्ञात",
     "state_uploading": "सीडिंग",
     "state_uploading_forced": "[फ़] सीडिंग",
@@ -185,7 +186,7 @@
     "label": "लेबल",
     "component": "अंग",
     "version": "संस्करण",
-    "commitish": "Commitish",
+    "commitish": "Commit",
     "private": "निजी",
     "last_upload": "अंतिम अपलोड",
     "last_activity_just_now": "अभी अभी",
@@ -289,7 +290,7 @@
     "per_second_format": "{0}/सेकंड",
     "eta_hms_format": "{0}घंटे{1} मिनट {2}सेकंड",
     "ip_filter_disabled": "IP फ़िल्टर: ❌",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "ip_filter": "IP फ़िल्टर",
     "amp_console": "&कंसोल",
     "some_torrents_already_in_session": "पहले से ही उपस्थित टोरेंट को छोड़ दिया …",
@@ -297,5 +298,9 @@
     "seed_mode": "सीड मोड",
     "select_ip_filter_file": "IP फ़िल्टर फ़ाइल का चयन करें",
     "file_filter_all_files": "सभी फाइलें (*.*)|*.*",
-    "ip_filter_enabled": "IP फ़िल्टर: ✔️"
+    "ip_filter_enabled": "IP फ़िल्टर: ✔️",
+    "theme": "थीम",
+    "light_theme": "हल्का",
+    "dark_theme": "गहरा",
+    "follow_system_theme": "सिस्टम"
 }

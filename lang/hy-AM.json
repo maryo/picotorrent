@@ -175,5 +175,13 @@
     "minimize_to_notification_area": "Նվազեցնելը ծանուցման տարածք",
     "close_to_notification_area": "Փակել ծանուցման տարածքում",
     "invalid_regex": "Անվավեր կանոնավոր արտահայտություն",
-    "options": "Ընտրանքներ"
+    "options": "Ընտրանքներ",
+    "theme": "Թեմա",
+    "light_theme": "Բաց",
+    "dark_theme": "Մուգ",
+    "follow_system_theme": "Համակարգ",
+    "state_error_files_missing": "Ֆայլերը բացակայում են - Դադարեցված",
+    "commitish": "Commit",
+    "component": "Բաղադրիչ",
+    "version": "Տարբերակ"
 }

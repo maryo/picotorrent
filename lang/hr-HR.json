@@ -82,6 +82,7 @@
     "state_downloading_queued": "U redu čekanja",
     "state_error": "Greška: [0]",
     "state_error_details": "Greška: {0} ({1})",
+    "state_error_files_missing": "Nedostaju datoteke - Pauzirano",
     "state_unknown": "Nepoznato",
     "state_uploading": "Slanje",
     "state_uploading_paused": "Završeno",
@@ -146,7 +147,7 @@
     "label": "Naljepnica",
     "component": "Komponenta",
     "version": "Verzija",
-    "commitish": "Predaj",
+    "commitish": "Commit",
     "private": "Privatno",
     "last_download": "Zadnje preuzimanje",
     "last_upload": "Zadnje slanje",
@@ -222,5 +223,9 @@
     "pause_on_low_disk_space": "Pauziraj kad je prostor na disk nedovoljan",
     "amp_create_torrent": "&Stvori torrent",
     "select_file": "Odaberi datoteku",
-    "options": "Postavke"
+    "options": "Postavke",
+    "theme": "Tema",
+    "light_theme": "Svijetla",
+    "dark_theme": "Tamna",
+    "follow_system_theme": "Sustav"
 }

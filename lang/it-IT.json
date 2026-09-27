@@ -224,6 +224,7 @@
     "client": "Client",
     "ip": "IP",
     "state_error_details": "Errore: {0} ({1})",
+    "state_error_files_missing": "File mancanti - In pausa",
     "privacy": "Privacy",
     "num_torrents": "{0} torrent",
     "downloaded_size": "Scaricato",
@@ -303,5 +304,9 @@
     "tier": "Livello",
     "some_torrents_already_in_session": "Salta i torrent che sono già stati aggiunti…",
     "all_torrents_already_in_session": "Non aggiungere torrent poiché sono già stati aggiunti tutti…",
-    "copyright_text": "© 2015-2021"
+    "copyright_text": "© 2015-2026",
+    "theme": "Tema",
+    "light_theme": "Chiaro",
+    "dark_theme": "Scuro",
+    "follow_system_theme": "Sistema"
 }

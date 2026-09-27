@@ -209,6 +209,7 @@
     "mode_hybrid": "v1 + v2 混合模式",
     "browse": "…",
     "state_error_details": "错误： {0} ({1})",
+    "state_error_files_missing": "文件缺失 - 已暂停",
     "dht_num_nodes": "DHT: {0} 节点",
     "pause_on_low_disk_space": "当磁盘空间不足时暂停",
     "amp_status_bar": "&状态栏",
@@ -222,7 +223,7 @@
     "label": "标签",
     "restart_picotorrent": "重启 PicoTorrent",
     "ip_filter_disabled": "IP过滤器：❌",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "exported_magnet_link_s": "导出磁力链接",
     "torrent_file_s": "种子文件",
     "export": "导出",
@@ -274,5 +275,10 @@
     "seed_mode": "做种模式",
     "select_ip_filter_file": "选择IP过滤器配置文件",
     "ip_filter_enabled": "IP过滤器：✔️",
-    "file_filter_all_files": "所有文件 (*.*)|*.*"
+    "file_filter_all_files": "所有文件 (*.*)|*.*",
+    "theme": "主题",
+    "light_theme": "浅色",
+    "dark_theme": "深色",
+    "follow_system_theme": "跟随系统",
+    "commitish": "提交"
 }

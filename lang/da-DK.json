@@ -1,1 +1,10 @@
-{}
+{
+    "theme": "Tema",
+    "light_theme": "Lys",
+    "dark_theme": "Mørk",
+    "follow_system_theme": "System",
+    "state_error_files_missing": "Filer mangler - Sat på pause",
+    "commitish": "Commit",
+    "component": "Komponent",
+    "version": "Version"
+}

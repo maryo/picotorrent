@@ -117,6 +117,7 @@
     "state_downloading_stalled": "Väntar på peers",
     "state_error": "Fel: {0}",
     "state_error_details": "Fel: {0} ({1})",
+    "state_error_files_missing": "Filer saknas - Pausad",
     "state_unknown": "Okänd",
     "state_uploading": "Seedar",
     "state_uploading_checking": "Kontrollerar",
@@ -224,5 +225,12 @@
     "no": "Nej",
     "options": "Inställningar",
     "compatibility": "Kompatibilitet",
-    "build_info_format": "Branch: {0}\nSHA1: {1}"
+    "build_info_format": "Branch: {0}\nSHA1: {1}",
+    "theme": "Tema",
+    "light_theme": "Ljust",
+    "dark_theme": "Mörkt",
+    "follow_system_theme": "System",
+    "commitish": "Commit",
+    "component": "Komponent",
+    "version": "Version"
 }

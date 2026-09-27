@@ -11,5 +11,13 @@
     "select_ip_filter_file": "අ.ජා. කෙ. පෙරහන් ගොනුවක් තෝරන්න",
     "name": "නම",
     "status": "තත්වය",
-    "contents": "අන්තර්ගතය"
+    "contents": "අන්තර්ගතය",
+    "theme": "තේමාව",
+    "light_theme": "ලා",
+    "dark_theme": "අඳුරු",
+    "follow_system_theme": "පද්ධතිය",
+    "state_error_files_missing": "ගොනු අස්ථානගතයි - විරාමයි",
+    "commitish": "Commit",
+    "component": "සංරචකය",
+    "version": "අනුවාදය"
 }

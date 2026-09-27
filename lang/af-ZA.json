@@ -1,1 +1,10 @@
-{}
+{
+    "theme": "Tema",
+    "light_theme": "Lig",
+    "dark_theme": "Donker",
+    "follow_system_theme": "Stelsel",
+    "state_error_files_missing": "Lêers vermis - Gepouseer",
+    "commitish": "Commit",
+    "component": "Komponent",
+    "version": "Weergawe"
+}

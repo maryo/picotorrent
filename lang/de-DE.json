@@ -256,7 +256,7 @@
     "restore_defaults": "Standardwerte wiederherstellen",
     "last_upload": "Letzter Upload",
     "last_activity_unknown": "Keine",
-    "commitish": "Commitish",
+    "commitish": "Commit",
     "mode_v1": "v1",
     "mode_v2": "v2",
     "mode_hybrid": "v1 + v2 hybrid",
@@ -275,6 +275,7 @@
     "torrent": "Torrent",
     "limits": "Begrenzungen",
     "state_error_details": "Fehler: {0} ({1})",
+    "state_error_files_missing": "Dateien fehlen - Pausiert",
     "plugins": "Plugins",
     "dht_num_nodes": "DHT: {0} Node(s)",
     "num_torrents": "{0} Torrent(s)",
@@ -304,8 +305,12 @@
     "file_filter_all_files": "Alle Dateien (*.*)|*.*",
     "ip_filter_enabled": "IP Filter: ✔️",
     "ip_filter_disabled": "IP Filter: ❌",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "exported_magnet_link_s": "Exportierte magnet Link(s)",
     "export": "Exportieren",
-    "torrent_file_s": "Torrent Datei(en)"
+    "torrent_file_s": "Torrent Datei(en)",
+    "theme": "Design",
+    "light_theme": "Hell",
+    "dark_theme": "Dunkel",
+    "follow_system_theme": "System"
 }

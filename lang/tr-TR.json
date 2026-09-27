@@ -228,6 +228,7 @@
     "flags": "Bayraklar",
     "restart_picotorrent": "PicoTorrent'i yeniden başlat",
     "state_error_details": "Hata: {0} ({1})",
+    "state_error_files_missing": "Dosyalar eksik - Duraklatıldı",
     "privacy": "Gizlilik",
     "encryption": "Şifreleme",
     "move_completed_downloads": "Tamamlanmış indirmeleri taşı",
@@ -251,7 +252,7 @@
     "restore_defaults_description": "Bu, çoğu ayarı varsayılan değerlerine geri yükleyecektir. Emin misiniz?",
     "add_to_session": "Oturuma ekle",
     "documentation": "Dokümantasyon",
-    "copyright_text": "© 2015-2021",
+    "copyright_text": "© 2015-2026",
     "export": "Dışa aktar",
     "torrent_file_s": "Torrent dosyaları",
     "exported_magnet_link_s": "Dışa aktarılan mıknatıs bağlantıları",
@@ -262,5 +263,10 @@
     "add_magnet_link_s_description": "Magnet bağlantıları ve info hashleri (satır başına bir tane)",
     "total_active": "Toplam aktif",
     "last_upload": "Son yükleme",
-    "url_seeds_input_per_line": "URL seedleri (satır başına bir tane)"
+    "url_seeds_input_per_line": "URL seedleri (satır başına bir tane)",
+    "theme": "Tema",
+    "light_theme": "Açık",
+    "dark_theme": "Koyu",
+    "follow_system_theme": "Sistem",
+    "commitish": "Commit"
 }
