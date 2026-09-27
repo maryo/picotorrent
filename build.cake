@@ -1,4 +1,3 @@
-#addin "nuget:?package=Cake.CMake&version=1.3.1"
 #tool  "nuget:?package=GitVersion.CommandLine&version=5.12.0"
 #tool  "nuget:?package=WiX&version=3.11.2"
 
@@ -20,6 +19,30 @@ var BootstrapperDirectory = Directory("./src/installer/bin") + Directory(configu
 var ResourceDirectory     = Directory("./res");
 
 var Version            = GitVersion();
+
+// GitVersion's branch-based versioning doesn't play well with our tag-only
+// pre-release workflow: GitHub Actions checks out tag pushes in detached
+// HEAD, which GitVersion can't map to any known branch pattern, producing an
+// ugly fallback like "0.26.0-tags-v0-26-0-alpha1.1"; and even checked out on
+// master, GitVersion's built-in master-branch config always strips
+// prerelease labels (it assumes master is always a finished release), so a
+// tag like v0.26.0-alpha1 would show as plain "0.26.0". When the current
+// commit is exactly a version tag, just use that tag's own name verbatim.
+IEnumerable<string> exactTagOutput;
+var exactTagExitCode = StartProcess(
+    "git",
+    new ProcessSettings { Arguments = "describe --tags --exact-match", RedirectStandardOutput = true },
+    out exactTagOutput);
+
+if (exactTagExitCode == 0)
+{
+    var exactTag = exactTagOutput.FirstOrDefault();
+    if (!string.IsNullOrEmpty(exactTag) && exactTag.StartsWith("v"))
+    {
+        Version.SemVer = exactTag.Substring(1);
+    }
+}
+
 var Installer          = string.Format("PicoTorrent-{0}-{1}.msi", Version.SemVer, platform);
 var InstallerBundle    = string.Format("PicoTorrent-{0}-{1}.exe", Version.SemVer, platform);
 var PortablePackage    = string.Format("PicoTorrent-{0}-{1}.zip", Version.SemVer, platform);
@@ -34,32 +57,54 @@ Task("Clean")
 {
     CleanDirectory(BootstrapperDirectory);
     CleanDirectory(BuildDirectory);
+
+    // CleanDirectory(BuildDirectory) only wipes build-x64/Release - it leaves
+    // the top-level CMakeCache.txt/CMakeFiles (one directory up, in
+    // OutputDirectory) untouched. A stale cache there can keep resolving
+    // find_package() calls against whatever state existed the first time
+    // CMake ran, silently hiding real configuration errors on later runs.
+    // (vcpkg_installed/ is intentionally left alone - wiping it would force
+    // every dependency to rebuild from scratch on every clean.)
+    var cmakeCache = OutputDirectory + File("CMakeCache.txt");
+    var cmakeFiles = OutputDirectory + Directory("CMakeFiles");
+
+    if (FileExists(cmakeCache))
+    {
+        DeleteFile(cmakeCache);
+    }
+
+    if (DirectoryExists(cmakeFiles))
+    {
+        DeleteDirectory(cmakeFiles, new DeleteDirectorySettings { Recursive = true, Force = true });
+    }
 });
 
 Task("Generate-Project")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    CMake(new CMakeSettings
+    var cmakePlatform = platform == "x86" ? "Win32" : "x64";
+
+    var args = new ProcessArgumentBuilder()
+        .Append("-S").AppendQuoted(".")
+        .Append("-B").AppendQuoted(OutputDirectory.Path.FullPath)
+        .Append("-A").AppendQuoted(cmakePlatform)
+        .Append($"-DGITVERSION_VAR_BRANCHNAME={Version.BranchName}")
+        .Append($"-DGITVERSION_VAR_SEMVER={Version.SemVer}")
+        .Append($"-DGITVERSION_VAR_SHORTSHA={Version.Sha.Substring(0,7)}")
+        .Append($"-DGITVERSION_VAR_VERSION_MAJOR={Version.Major}")
+        .Append($"-DGITVERSION_VAR_VERSION_MINOR={Version.Minor}")
+        .Append($"-DGITVERSION_VAR_VERSION_PATCH={Version.Patch}")
+        .Append($"-DGITVERSION_VAR_VERSION={Version.MajorMinorPatch}")
+        .Append($"-DVCPKG_TARGET_TRIPLET={vcpkgTriplet}")
+        .Append("-DCMAKE_POLICY_VERSION_MINIMUM=3.5")
+        .Append("-DCMAKE_CONFIGURATION_TYPES=Release");
+
+    var exitCode = StartProcess("cmake", new ProcessSettings { Arguments = args });
+    if (exitCode != 0)
     {
-        SourcePath = ".",
-        OutputPath = OutputDirectory,
-        Generator = "Visual Studio 17 2022",
-        Platform = platform == "x86" ? "Win32" : "x64",
-        Toolset = "v143",
-        Options = new []
-        {
-            $"-DGITVERSION_VAR_BRANCHNAME={Version.BranchName}",
-            $"-DGITVERSION_VAR_SEMVER={Version.SemVer}",
-            $"-DGITVERSION_VAR_SHORTSHA={Version.Sha.Substring(0,7)}",
-            $"-DGITVERSION_VAR_VERSION_MAJOR={Version.Major}",
-            $"-DGITVERSION_VAR_VERSION_MINOR={Version.Minor}",
-            $"-DGITVERSION_VAR_VERSION_PATCH={Version.Patch}",
-            $"-DGITVERSION_VAR_VERSION={Version.MajorMinorPatch}",
-            $"-DVCPKG_TARGET_TRIPLET={vcpkgTriplet}",
-            $"-DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-        }
-    });
+        throw new Exception($"CMake: Process returned an error (exit code {exitCode}).");
+    }
 });
 
 Task("Build")
@@ -68,8 +113,7 @@ Task("Build")
 {
     var settings = new MSBuildSettings()
         .SetConfiguration(configuration)
-        .SetMaxCpuCount(0)
-        .UseToolVersion(MSBuildToolVersion.VS2022);
+        .SetMaxCpuCount(0);
     if(platform == "x86")
     {
         settings.WithProperty("Platform", "Win32")
@@ -163,8 +207,7 @@ Task("Build-Installer-Bootstrapper")
 {
     var settings = new MSBuildSettings()
         .SetConfiguration(configuration)
-        .SetMaxCpuCount(0)
-        .UseToolVersion(MSBuildToolVersion.VS2022);
+        .SetMaxCpuCount(0);
 
     MSBuild("./src/installer/PicoTorrentBootstrapper.sln", settings);
 });
