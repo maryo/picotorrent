@@ -757,6 +757,26 @@ void Session::OnAlert()
                 torrentToResume->second->Pause();
                 m_pauseAfterRecheck.erase(torrentToResume);
             }
+            else
+            {
+                lt::torrent_status ts = tca->handle.status();
+
+                // libtorrent remembers the last time this torrent was fully
+                // complete (last_seen_complete). If that is set but the check
+                // we just finished shows it is no longer finished, the data
+                // went missing outside of PicoTorrent (eg. deleted or moved
+                // externally) rather than this being a normal, still-in-
+                // progress download. Pause instead of silently letting
+                // auto-management resume it - that stops seeding the
+                // (now-partial) data to peers and avoids redownloading
+                // without the user knowing anything happened.
+                if (ts.last_seen_complete > 0 && !ts.is_finished)
+                {
+                    auto handle = m_torrents.at(tca->handle.info_hashes());
+                    handle->SetFilesMissing(true);
+                    handle->Pause();
+                }
+            }
 
             break;
         }

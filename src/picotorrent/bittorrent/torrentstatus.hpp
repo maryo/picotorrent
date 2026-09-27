@@ -45,6 +45,7 @@ namespace BitTorrent
         std::string                                           comment;
         std::string                                           error;
         std::string                                           errorDetails;
+        bool                                                  filesMissing;
         std::chrono::seconds                                  eta;
         std::string                                           infoHash;
         std::string                                           labelName;
