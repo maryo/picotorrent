@@ -1,6 +1,10 @@
 #include "torrentlistview.hpp"
 
+#include <wx/math.h>
+#include <wx/msw/private.h>
+#include <wx/msw/uxtheme.h>
 #include <wx/persist.h>
+#include <wx/settings.h>
 
 #include "../bittorrent/torrenthandle.hpp"
 #include "models/torrentlistmodel.hpp"
@@ -9,6 +13,144 @@
 
 using pt::UI::TorrentListView;
 using pt::UI::Models::TorrentListModel;
+
+namespace
+{
+    RECT ConvertToRECT(wxDC& dc, wxRect const& rect)
+    {
+        RECT rc;
+        wxCopyRectToRECT(dc.GetImpl()->MSWApplyWXTransform(rect), rc);
+        return rc;
+    }
+
+    // wxDataViewProgressRenderer only draws the bar itself - there is no
+    // built-in way to also show the percentage as text, so track the value
+    // ourselves and draw it centered on top of the bar.
+    //
+    // We also draw the bar itself rather than delegating to
+    // wxDataViewProgressRenderer::Render(): that ends up in wx's own
+    // wxRendererXP::DrawGauge() (src/msw/renderer.cpp), which opens the
+    // "PROGRESS" UxTheme class without ever requesting its dark mode
+    // variant - so in dark mode the filled and unfilled parts of the bar
+    // come out barely distinguishable. This is already fixed on wx's
+    // unreleased master (requesting "DarkMode_DarkTheme::Progress"), just
+    // not yet in the 3.3.3 release we build against. Requesting that class
+    // ourselves fixes it the same way; wxUxThemeHandle only substitutes it
+    // when dark mode is actually active, so light mode is unaffected.
+    //
+    // Drawing it ourselves also lets us split the percentage text color to
+    // match what it's drawn over - the same technique qBittorrent gets from
+    // Qt's Fusion progress bar style: white text on the filled part,
+    // ordinary window text color on the unfilled part. A single fixed text
+    // color is never reliably readable on both, in either light or dark
+    // mode, selected or not.
+    class ProgressWithLabelRenderer : public wxDataViewProgressRenderer
+    {
+    public:
+        bool SetValue(wxVariant const& value) override
+        {
+            m_progress = value.GetLong();
+            return wxDataViewProgressRenderer::SetValue(value);
+        }
+
+        bool Render(wxRect cell, wxDC* dc, int state) override
+        {
+            wxWindow* win = GetView();
+            wxUxThemeHandle theme(win, L"PROGRESS", L"DarkMode_DarkTheme::Progress");
+
+            wxRect fillRect = cell;
+
+            if (theme)
+            {
+                RECT const barRect = ConvertToRECT(*dc, cell);
+                theme.DrawBackground(GetHdcOf(dc->GetTempHDC()), barRect, PP_BAR);
+
+                RECT contentRect;
+                ::GetThemeBackgroundContentRect(
+                    theme,
+                    GetHdcOf(dc->GetTempHDC()),
+                    PP_BAR,
+                    0,
+                    &barRect,
+                    &contentRect);
+
+                contentRect.right = contentRect.left
+                    + wxMulDivInt32(contentRect.right - contentRect.left, m_progress, 100);
+
+                // The theme's own PP_CHUNK is a fixed green with no way to
+                // recolor it (no alternate class name, no PBM_SETBARCOLOR
+                // equivalent for a part drawn this way) - fill it ourselves
+                // instead, in the system accent color, so it matches the
+                // user's Windows theme.
+                dc->SetPen(*wxTRANSPARENT_PEN);
+                dc->SetBrush(wxSystemSettings::GetColour(wxSYS_COLOUR_HIGHLIGHT));
+                dc->DrawRectangle(wxRect(
+                    contentRect.left,
+                    contentRect.top,
+                    contentRect.right - contentRect.left,
+                    contentRect.bottom - contentRect.top));
+
+                fillRect = wxRect(
+                    contentRect.left,
+                    contentRect.top,
+                    contentRect.right - contentRect.left,
+                    contentRect.bottom - contentRect.top);
+            }
+            else
+            {
+                // No theme support at all (classic/unthemed desktop) - fall
+                // back to the plain, untextured gauge and just estimate the
+                // fill width ourselves for the text color split below.
+                wxDataViewProgressRenderer::Render(cell, dc, state);
+                fillRect.width = wxMulDivInt32(cell.width, m_progress, 100);
+            }
+
+            DrawLabel(cell, fillRect, dc);
+
+            return true;
+        }
+
+        wxSize GetSize() const override
+        {
+            return GetView()->FromDIP(wxSize(-1, 16));
+        }
+
+    private:
+        void DrawLabel(wxRect const& cell, wxRect const& fillRect, wxDC* dc)
+        {
+            wxString const text = wxString::Format("%d%%", m_progress);
+            wxSize const textSize = dc->GetTextExtent(text);
+            wxPoint const pos(
+                cell.x + (cell.width - textSize.x) / 2,
+                cell.y + (cell.height - textSize.y) / 2);
+
+            wxColour const savedForeground = dc->GetTextForeground();
+
+            // Filled part: fixed white, readable on any reasonably
+            // saturated accent color.
+            dc->SetClippingRegion(fillRect);
+            dc->SetTextForeground(*wxWHITE);
+            dc->DrawText(text, pos);
+            dc->DestroyClippingRegion();
+
+            // Unfilled part: ordinary window text color, so it stays
+            // correct in both light and dark mode without us having to
+            // detect which one is active.
+            wxRect trackRect = cell;
+            trackRect.x = fillRect.GetRight() + 1;
+            trackRect.width = cell.GetRight() - trackRect.x + 1;
+
+            dc->SetClippingRegion(trackRect);
+            dc->SetTextForeground(wxSystemSettings::GetColour(wxSYS_COLOUR_WINDOWTEXT));
+            dc->DrawText(text, pos);
+            dc->DestroyClippingRegion();
+
+            dc->SetTextForeground(savedForeground);
+        }
+
+        long m_progress = 0;
+    };
+}
 
 TorrentListView::TorrentListView(wxWindow* parent, wxWindowID id, pt::UI::Models::TorrentListModel* model)
     : wxDataViewCtrl(parent, id, wxDefaultPosition, wxDefaultSize, wxDV_MULTIPLE, wxDefaultValidator, "TorrentListView"),
@@ -74,7 +216,7 @@ TorrentListView::TorrentListView(wxWindow* parent, wxWindowID id, pt::UI::Models
         ColumnMetadata(
             new wxDataViewColumn(
                 i18n("progress"),
-                new wxDataViewProgressRenderer(),
+                new ProgressWithLabelRenderer(),
                 TorrentListModel::Columns::Progress,
                 FromDIP(100),
                 wxALIGN_NOT,
