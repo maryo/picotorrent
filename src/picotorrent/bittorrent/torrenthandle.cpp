@@ -195,18 +195,37 @@ void TorrentHandle::RemoveFiles()
 
 void TorrentHandle::Resume()
 {
+    bool const wasFilesMissing = m_filesMissing;
+
     m_filesMissing = false;
     m_th->set_flags(lt::torrent_flags::auto_managed);
     m_th->clear_error();
     m_th->resume();
+
+    if (wasFilesMissing)
+    {
+        // The user is explicitly resuming a torrent we'd flagged as having
+        // missing data - force a fresh disk check instead of trusting the
+        // stale "no data" status from before, in case the data has
+        // reappeared since (eg. an external/network drive that wasn't
+        // mounted yet when we first checked).
+        m_th->force_recheck();
+    }
 }
 
 void TorrentHandle::ResumeForce()
 {
+    bool const wasFilesMissing = m_filesMissing;
+
     m_filesMissing = false;
     m_th->unset_flags(lt::torrent_flags::auto_managed);
     m_th->clear_error();
     m_th->resume();
+
+    if (wasFilesMissing)
+    {
+        m_th->force_recheck();
+    }
 }
 
 void TorrentHandle::ScrapeTracker(int trackerIndex)

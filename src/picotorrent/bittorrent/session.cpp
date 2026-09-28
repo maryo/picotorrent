@@ -7,6 +7,7 @@
 #include <libtorrent/add_torrent_params.hpp>
 #include <libtorrent/alert_types.hpp>
 #include <libtorrent/entry.hpp>
+#include <libtorrent/extensions.hpp>
 #include <libtorrent/extensions/smart_ban.hpp>
 #include <libtorrent/extensions/ut_metadata.hpp>
 #include <libtorrent/extensions/ut_pex.hpp>
@@ -50,6 +51,36 @@ wxDEFINE_EVENT(ptEVT_TORRENT_REMOVED, pt::BitTorrent::InfoHashEvent);
 wxDEFINE_EVENT(ptEVT_TORRENT_STATISTICS, pt::BitTorrent::TorrentStatisticsEvent);
 wxDEFINE_EVENT(ptEVT_TORRENTS_UPDATED, pt::BitTorrent::TorrentsUpdatedEvent);
 wxDEFINE_EVENT(ptEVT_IPFILTER_UPDATED, wxThreadEvent);
+
+namespace
+{
+    // Reacts to fastresume_rejected_alert synchronously, on libtorrent's own
+    // network thread, as part of alert_manager::maybe_notify() - ie. before
+    // our own alert queue is even drained on the wx thread via OnAlert().
+    // fastresume_rejected_alert is generated early, in
+    // torrent::on_resume_data_checked(), whenever our own previously-saved
+    // resume data says a piece is done but the file touched by it doesn't
+    // match on disk (missing or too small) - well before the torrent could
+    // transition to downloading and start talking to peers. Pausing here
+    // instead of in OnAlert() closes that window entirely.
+    class FilesMissingPlugin : public lt::plugin
+    {
+    public:
+        lt::feature_flags_t implemented_features() override
+        {
+            return lt::plugin::alert_feature;
+        }
+
+        void on_alert(lt::alert const* alert) override
+        {
+            auto* fra = lt::alert_cast<lt::fastresume_rejected_alert>(alert);
+            if (fra == nullptr) { return; }
+
+            fra->handle.unset_flags(lt::torrent_flags::auto_managed);
+            fra->handle.pause();
+        }
+    };
+}
 
 static std::string str(lt::info_hash_t ih)
 {
@@ -337,6 +368,7 @@ Session::Session(wxEvtHandler* parent, std::shared_ptr<pt::Core::Database> db, s
     m_session = std::make_unique<lt::session>(sp);
     m_session->add_extension(&lt::create_ut_metadata_plugin);
     m_session->add_extension(&lt::create_smart_ban_plugin);
+    m_session->add_extension(std::make_shared<FilesMissingPlugin>());
 
     if (cfg->Get<bool>("libtorrent.enable_pex").value())
     {
@@ -595,6 +627,27 @@ void Session::OnAlert()
             break;
         }
 
+        case lt::fastresume_rejected_alert::alert_type:
+        {
+            lt::fastresume_rejected_alert* fra = lt::alert_cast<lt::fastresume_rejected_alert>(alert);
+
+            if (m_torrents.count(fra->handle.info_hashes()) == 0)
+            {
+                break;
+            }
+
+            BOOST_LOG_TRIVIAL(warning) << "Files missing for torrent, pausing: " << fra->message();
+
+            auto torrent = m_torrents.at(fra->handle.info_hashes());
+            torrent->SetFilesMissing(true);
+
+            TorrentsUpdatedEvent evtUpdated(ptEVT_TORRENTS_UPDATED);
+            evtUpdated.SetData({ torrent });
+            wxPostEvent(m_parent, evtUpdated);
+
+            break;
+        }
+
         case lt::file_error_alert::alert_type:
         {
             lt::file_error_alert* fea = lt::alert_cast<lt::file_error_alert>(alert);
@@ -757,26 +810,10 @@ void Session::OnAlert()
                 torrentToResume->second->Pause();
                 m_pauseAfterRecheck.erase(torrentToResume);
             }
-            else
-            {
-                lt::torrent_status ts = tca->handle.status();
 
-                // libtorrent remembers the last time this torrent was fully
-                // complete (last_seen_complete). If that is set but the check
-                // we just finished shows it is no longer finished, the data
-                // went missing outside of PicoTorrent (eg. deleted or moved
-                // externally) rather than this being a normal, still-in-
-                // progress download. Pause instead of silently letting
-                // auto-management resume it - that stops seeding the
-                // (now-partial) data to peers and avoids redownloading
-                // without the user knowing anything happened.
-                if (ts.last_seen_complete > 0 && !ts.is_finished)
-                {
-                    auto handle = m_torrents.at(tca->handle.info_hashes());
-                    handle->SetFilesMissing(true);
-                    handle->Pause();
-                }
-            }
+            // If files were found to be missing, FilesMissingPlugin already
+            // paused the torrent (in reaction to fastresume_rejected_alert,
+            // before the check even started) - nothing further to do here.
 
             break;
         }
