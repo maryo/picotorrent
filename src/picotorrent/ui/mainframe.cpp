@@ -9,6 +9,7 @@
 #include <libtorrent/load_torrent.hpp>
 #include <libtorrent/magnet_uri.hpp>
 #include <libtorrent/torrent_info.hpp>
+#include <wx/dnd.h>
 #include <wx/persist.h>
 #include <wx/persist/toplevel.h>
 #include <wx/sizer.h>
@@ -51,6 +52,35 @@ const char* WindowTitle = "PicoTorrent";
 
 #define LABEL_ICON_SIZE 16
 
+namespace
+{
+    // Reuses the same path command-line arguments and the DDE "send to
+    // running instance" flow already go through, so dropped files get the
+    // exact same parsing/dedup/error handling as any other way of adding a
+    // torrent.
+    class TorrentFileDropTarget : public wxFileDropTarget
+    {
+    public:
+        TorrentFileDropTarget(MainFrame* frame) : m_frame(frame) {}
+
+        bool OnDropFiles(wxCoord, wxCoord, wxArrayString const& filenames) override
+        {
+            pt::CommandLineOptions options;
+
+            for (auto const& filename : filenames)
+            {
+                options.files.push_back(pt::Utils::toStdString(filename.ToStdWstring()));
+            }
+
+            m_frame->HandleParams(options);
+            return true;
+        }
+
+    private:
+        MainFrame* m_frame;
+    };
+}
+
 MainFrame::MainFrame(std::shared_ptr<pt::Core::Environment> env, std::shared_ptr<pt::Core::Database> db, std::shared_ptr<pt::Core::Configuration> cfg, pt::CommandLineOptions const& options)
     : wxFrame(nullptr, wxID_ANY, WindowTitle, wxDefaultPosition, wxDefaultSize, wxDEFAULT_FRAME_STYLE, "MainFrame"),
     m_env(env),
@@ -69,6 +99,12 @@ MainFrame::MainFrame(std::shared_ptr<pt::Core::Environment> env, std::shared_ptr
     m_ipc(std::make_unique<IPC::Server>(this))
 {
     m_console = new Console(this, wxID_ANY, m_torrentListModel, m_cfg->IsDarkMode());
+
+    // A drop target only reacts to drops onto its own window, not children
+    // that have no drop target of their own - set it on the frame and on
+    // the torrent list, since that's most of the visible window area.
+    this->SetDropTarget(new TorrentFileDropTarget(this));
+    m_torrentList->SetDropTarget(new TorrentFileDropTarget(this));
 
     m_splitter->SetWindowStyleFlag(
         m_splitter->GetWindowStyleFlag() | wxSP_LIVE_UPDATE);
@@ -816,8 +852,24 @@ void MainFrame::OnViewPreferences(wxCommandEvent&)
 
 void MainFrame::ParseTorrentFiles(std::vector<lt::add_torrent_params>& params, std::vector<std::wstring> const& paths)
 {
+    // .torrent files are small - a few KB, rarely more than a couple of MB
+    // even for huge multi-file torrents. Reject anything bigger up front
+    // instead of reading it fully into memory first (below), which would
+    // otherwise block the UI thread for as long as it takes to read
+    // whatever was dropped/opened by mistake (eg. a video file).
+    constexpr std::uintmax_t MaxTorrentFileSize = 20 * 1024 * 1024; // 20 MB
+
     for (std::wstring const& path : paths)
     {
+        std::error_code fsEc;
+        auto const fileSize = fs::file_size(path, fsEc);
+
+        if (fsEc || fileSize > MaxTorrentFileSize)
+        {
+            BOOST_LOG_TRIVIAL(warning) << "Skipping file, too large to be a torrent file: " << Utils::toStdString(path);
+            continue;
+        }
+
         lt::error_code ec;
 
         std::ifstream in(path, std::ios::binary);
