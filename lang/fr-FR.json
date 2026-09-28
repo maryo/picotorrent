@@ -97,6 +97,7 @@
     "scrape": "Scrapper",
     "picotorrent_v_available": "PicoTorrent %s disponible",
     "no_update_available": "Aucune mise à jour n'est disponible",
+    "update_check_failed": "Impossible de vérifier les mises à jour",
     "show_on_github": "Afficher sur GitHub",
     "new_version_available": "Une version plus récente de PicoTorrent est disponible.",
     "ignore_update": "Ignorer cette mise à jour",

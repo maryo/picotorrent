@@ -149,6 +149,7 @@
     "scrape": "Scrape",
     "picotorrent_v_available": "PicoTorrent %s je dostupan",
     "no_update_available": "Nema dostupnog ažuriranja",
+    "update_check_failed": "Провера ажурирања није успела",
     "show_on_github": "Prikaži na GitHub-u",
     "new_version_available": "Novija verzija PicoTorrent-a je dostupna.",
     "ignore_update": "Zanemari ovo ažuriranje",

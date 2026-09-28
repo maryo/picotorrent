@@ -34,6 +34,7 @@ ICO_TERMINAL_DARK_THEME ICON "..\\..\\res\\terminal-dark-theme.ico"
 20220508103321_insert_theme_id                  DBMIGRATION "..\\..\\res\\dbmigrations\\20220508103321_insert_theme_id.sql"
 20230511023104_extend_advanced_settings         DBMIGRATION "..\\..\\res\\dbmigrations\\20230511023104_extend_advanced_settings.sql"
 20260927120000_insert_advanced_libtorrent_settings DBMIGRATION "..\\..\\res\\dbmigrations\\20260927120000_insert_advanced_libtorrent_settings.sql"
+20260928020000_point_update_checks_at_own_fork  DBMIGRATION "..\\..\\res\\dbmigrations\\20260928020000_point_update_checks_at_own_fork.sql"
 
 VS_VERSION_INFO VERSIONINFO
  FILEVERSION        VER_FILE_VERSION

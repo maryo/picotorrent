@@ -17,6 +17,7 @@
     "ul_limit": "Tốc độ tải lên",
     "ip": "IP",
     "no_update_available": "Không có bản cập nhật mới",
+    "update_check_failed": "Không thể kiểm tra cập nhật",
     "ignore_update": "Bỏ qua bản cập nhật này",
     "show_on_github": "Xem trên GitHub",
     "confirm_remove": "Xác nhận xóa tệp tin",

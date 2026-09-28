@@ -84,6 +84,7 @@
     "scrape": "Atmest",
     "picotorrent_v_available": "PicoTorrent {0} pieejams",
     "no_update_available": "Atjauninājumi nav pieejami",
+    "update_check_failed": "Neizdevās pārbaudīt atjauninājumus",
     "show_on_github": "Parādīt iekš GitHub",
     "new_version_available": "Jaunāka PicoTorrent versija ir pieejama.",
     "ignore_update": "Ignorēt šo atjauninājumu",

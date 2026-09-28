@@ -77,6 +77,7 @@
     "next_announce": "Prossimo annuncio",
     "picotorrent_v_available": "È disponibile PicoTorrent {0}",
     "no_update_available": "Nessun aggiornamento disponibile",
+    "update_check_failed": "Impossibile controllare gli aggiornamenti",
     "show_on_github": "Visualizza in GitHub",
     "new_version_available": "È disponibile una nuova versione di PicoTorrent.",
     "ignore_update": "Ignora questo aggiornamento",

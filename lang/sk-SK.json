@@ -208,6 +208,7 @@
     "socks5_with_credentials": "SOCKS5 (s prihlásením)",
     "flags": "Značky",
     "no_update_available": "Používate najnovšiu verziu",
+    "update_check_failed": "Nepodarilo sa skontrolovať aktualizácie",
     "confirm_remove_description": "Táto voľba odstráni všetky stiahnuté súbory týmto torrentom.",
     "state_downloading_metadata": "Sťahovanie metadát",
     "state_uploading_paused": "Dokončené",

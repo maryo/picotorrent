@@ -244,6 +244,7 @@
     "ip": "IP",
     "next_announce": "अगली घोषणा",
     "no_update_available": "कोई अद्यतन उपलब्ध नहीं है",
+    "update_check_failed": "अपडेट की जांच नहीं की जा सकी",
     "confirm_remove_description": "यह इस टोरेंट के लिए किसी भी डाउनलोड की गई फाइल को हटा देगा।",
     "confirm_close_description": "क्या आप वाकई PicoTorrent को बंद करना चाहते हैं?",
     "remember_choice": "मेरी पसंद याद रखें",

@@ -117,6 +117,26 @@ void show_no_update(libpico_mainwnd_t* wnd)
     TaskDialogIndirect(&tdf, nullptr, nullptr, nullptr);
 }
 
+void show_update_check_failed(libpico_mainwnd_t* wnd)
+{
+    HWND hWnd = nullptr;
+    libpico_mainwnd_native_handle(wnd, reinterpret_cast<void**>(&hWnd));
+
+    wchar_t main[DEFAULT_I18N_BUFFER_SIZE];
+    size_t main_len = DEFAULT_I18N_BUFFER_SIZE;
+    libpico_i18n("update_check_failed", main, &main_len);
+
+    TASKDIALOGCONFIG tdf = { sizeof(TASKDIALOGCONFIG) };
+    tdf.dwCommonButtons = TDCBF_OK_BUTTON;
+    tdf.dwFlags = TDF_POSITION_RELATIVE_TO_WINDOW;
+    tdf.hwndParent = hWnd;
+    tdf.pszMainIcon = TD_WARNING_ICON;
+    tdf.pszMainInstruction = main;
+    tdf.pszWindowTitle = L"PicoTorrent";
+
+    TaskDialogIndirect(&tdf, nullptr, nullptr, nullptr);
+}
+
 libpico_result_t parse_response(
     libpico_http_response_t* response,
     libpico_http_status_t status,
@@ -148,7 +168,14 @@ libpico_result_t parse_response(
 
             const sajson::value& root = doc.get_root();
 
-            std::string version = root.get_value_of_key(sajson::literal("version")).as_string();
+            // GitHub's releases API calls these fields "tag_name"/"html_url",
+            // and tag_name is prefixed with 'v' (eg. "v0.26.0"), which
+            // semver::version's parser rejects as invalid - strip it before
+            // parsing.
+            std::string tag = root.get_value_of_key(sajson::literal("tag_name")).as_string();
+            std::string version = (!tag.empty() && (tag[0] == 'v' || tag[0] == 'V'))
+                ? tag.substr(1)
+                : tag;
 
             char ignoredVersion[100];
             size_t ignoredVersionLen = 100;
@@ -169,7 +196,7 @@ libpico_result_t parse_response(
 
             if (parsedVersion > currentVersion)
             {
-                std::string url = root.get_value_of_key(sajson::literal("url")).as_string();
+                std::string url = root.get_value_of_key(sajson::literal("html_url")).as_string();
 
                 show_available_update(
                     data->wnd,
@@ -184,6 +211,34 @@ libpico_result_t parse_response(
         }
         break;
     }
+
+    case libpico_http_not_found:
+    {
+        // The GitHub releases API returns 404 when the repo has no
+        // published (non-draft, non-prerelease) release at all, which is a
+        // legitimate, distinguishable state - not a genuine request
+        // failure (handled separately in the default case below), even
+        // though GitHub itself doesn't actually distinguish the two: a
+        // wrong/renamed repo or a private one without auth also 404s the
+        // same way, indistinguishably from our side.
+        if (data->force)
+        {
+            show_no_update(data->wnd);
+        }
+
+        break;
+    }
+
+    default:
+        // A genuine failure (network error, rate limiting, server error,
+        // ...). Only mention it for a manual check - the automatic
+        // check-on-startup should stay silent about transient failures.
+        if (data->force)
+        {
+            show_update_check_failed(data->wnd);
+        }
+
+        break;
     }
 
     return libpico_ok;

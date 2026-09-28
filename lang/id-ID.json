@@ -97,6 +97,7 @@
     "scrape": "Scrape",
     "picotorrent_v_available": "PicoTorrent %s tersedia",
     "no_update_available": "Pembaruan tidak tersedia",
+    "update_check_failed": "Tidak dapat memeriksa pembaruan",
     "show_on_github": "Tampilkan di GitHub",
     "new_version_available": "Versi terbaru dari PicoTorrent telah tersedia.",
     "ignore_update": "Abaikan pembaruan ini",

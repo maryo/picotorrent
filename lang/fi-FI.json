@@ -88,6 +88,7 @@
     "scrape": "Katsaus",
     "picotorrent_v_available": "PicoTorrent {0} saatavilla",
     "no_update_available": "Päivityksiä ei löytynyt",
+    "update_check_failed": "Päivitysten tarkistus epäonnistui",
     "show_on_github": "Näytä GitHubissa",
     "new_version_available": "Uusi versio PicoTorrentista on saatavilla.",
     "ignore_update": "Piilota tämä päivitys",

@@ -86,6 +86,7 @@
     "scrape": "Πληροφορίες Αιτημάτων Scrape",
     "picotorrent_v_available": "Η εκδοση PicoTorrent {0} είναι διαθέσιμη",
     "no_update_available": "Δεν υπάρχει διαθέσιμη ενημέρωση",
+    "update_check_failed": "Δεν ήταν δυνατός ο έλεγχος για ενημερώσεις",
     "show_on_github": "Επίσκεψη GitHub",
     "new_version_available": "Μια νέα έκδοση PicoTorrent είναι διαθέσημη.",
     "ignore_update": "Αγνόηση ενημέρωσης",

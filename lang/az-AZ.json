@@ -73,6 +73,7 @@
     "scrape": "Sıyır",
     "picotorrent_v_available": "PicoTorrent %s mövcuddur",
     "no_update_available": "Yeniləmə mövcud deyil",
+    "update_check_failed": "Yeniləmələr yoxlanıla bilmədi",
     "show_on_github": "GitHub-da göstər",
     "new_version_available": "PicoTorrent-in yeni versiyası mövcuddur.",
     "ignore_update": "Yeniləməni göz ardı et",

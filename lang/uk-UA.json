@@ -97,6 +97,7 @@
     "scrape": "Запит стану",
     "picotorrent_v_available": "Доступна версія PicoTorrent %s",
     "no_update_available": "Немає оновлень",
+    "update_check_failed": "Не вдалося перевірити оновлення",
     "show_on_github": "Показати на GitHub",
     "new_version_available": "Доступна нова версія PicoTorrent.",
     "ignore_update": "Пропустити це оновлення",

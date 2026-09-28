@@ -89,6 +89,7 @@
     "next_announce": "Kitas pranešimas",
     "picotorrent_v_available": "Išleista „PicoTorrent {0}“",
     "no_update_available": "Naujinimų nėra",
+    "update_check_failed": "Nepavyko patikrinti atnaujinimų",
     "show_on_github": "Parodyti „GitHub“ platformoje",
     "new_version_available": "Išleistas „PicoTorrent“ naujinimas.",
     "ignore_update": "Nepaisyti šio naujinimo",

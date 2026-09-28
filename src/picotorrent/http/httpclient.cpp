@@ -33,6 +33,11 @@ HttpClient::HttpClient()
         WINHTTP_NO_PROXY_BYPASS,
         WINHTTP_FLAG_ASYNC);
 
+    // Default WinHTTP timeouts are much longer (60s connect, 30s send/
+    // receive) - a request that can't reach its server would otherwise
+    // leave a caller waiting up to a minute to find out.
+    WinHttpSetTimeouts(m_session, 10000, 10000, 10000, 10000);
+
     WinHttpSetStatusCallback(
         m_session,
         &HttpClient::StatusCallbackProxy,
@@ -166,6 +171,19 @@ void HttpClient::StatusCallbackProxy(HINTERNET, DWORD_PTR dwContext, DWORD dwInt
     case WINHTTP_CALLBACK_STATUS_SENDREQUEST_COMPLETE:
     {
         WinHttpReceiveResponse(state->hRequest, NULL);
+        break;
+    }
+
+    case WINHTTP_CALLBACK_STATUS_REQUEST_ERROR:
+    {
+        // A low-level failure (DNS, TLS, timeout, ...) - previously this
+        // just left the request hanging forever with no callback ever
+        // invoked. state->statusCode is still 0 here (never got as far as
+        // reading headers), which callers already treat as a generic
+        // failure distinct from any real HTTP status.
+        wxCommandEvent evt(ptEVT_HTTP_RESPONSE);
+        evt.SetClientData(state);
+        wxPostEvent(state->client, evt);
         break;
     }
     }

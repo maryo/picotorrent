@@ -173,6 +173,7 @@
     "next_announce": "Další announce",
     "picotorrent_v_available": "PicoTorrent %je dostupná",
     "no_update_available": "Aktualizace není k dispozici",
+    "update_check_failed": "Nepodařilo se zkontrolovat aktualizace",
     "show_on_github": "Zobrazit na GitHub",
     "ignore_update": "Ignorovat tuto aktualizaci",
     "confirm_remove_description": "Tato volba odstraní všechny soubory stažené tímto torrentem.",

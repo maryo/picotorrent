@@ -86,6 +86,7 @@
     "scrape": "Քերել",
     "picotorrent_v_available": "PicoTorrent {0} առկա է",
     "no_update_available": "Թարմացումներ չկան",
+    "update_check_failed": "Չհաջողվեց ստուգել թարմացումները",
     "show_on_github": "Ցույց տալ Github-ում",
     "new_version_available": "Հասանելի է նոր տարբերակ",
     "ignore_update": "Անտեսել այս թարմացումը",

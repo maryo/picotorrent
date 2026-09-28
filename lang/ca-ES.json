@@ -81,6 +81,7 @@
     "scrape": "Raspar",
     "picotorrent_v_available": "PicoTorrent {0} disponible",
     "no_update_available": "Cap actualització disponible",
+    "update_check_failed": "No s'ha pogut comprovar si hi ha actualitzacions",
     "show_on_github": "Mostra a GitHub",
     "new_version_available": "Una nova versió de PicoTorrent està disponible.",
     "ignore_update": "Ignora aquesta actualització",

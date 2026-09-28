@@ -97,6 +97,7 @@
     "scrape": "Scrape-запрос",
     "picotorrent_v_available": "PicoTorrent {0} доступен",
     "no_update_available": "Нет доступных обновлений",
+    "update_check_failed": "Не удалось проверить наличие обновлений",
     "show_on_github": "Открыть на GitHub",
     "new_version_available": "Доступна новая версия PicoTorrent.",
     "ignore_update": "Пропустить это обновление",

@@ -75,6 +75,7 @@
     "next_announce": "Sıradaki duyuru",
     "picotorrent_v_available": "PicoTorrent {0} mevcut",
     "no_update_available": "Yeni sürüm yok",
+    "update_check_failed": "Güncellemeler denetlenemedi",
     "show_on_github": "GitHub üzerinde göster",
     "new_version_available": "Yeni bir PicoTorrent versiyonu mevcut.",
     "ignore_update": "Bu güncellemeyi yoksay",

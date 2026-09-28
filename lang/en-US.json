@@ -73,6 +73,7 @@
     "scrape": "Scrape",
     "picotorrent_v_available": "PicoTorrent %s available",
     "no_update_available": "No update available",
+    "update_check_failed": "Couldn't check for updates",
     "show_on_github": "Show on GitHub",
     "new_version_available": "A newer version of PicoTorrent is available.",
     "ignore_update": "Ignore this update",

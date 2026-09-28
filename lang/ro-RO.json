@@ -79,6 +79,7 @@
     "scrape": "Încurcătură",
     "picotorrent_v_available": "PicoTorrent {0} disponibil",
     "no_update_available": "Nicio actualizare disponibilă",
+    "update_check_failed": "Nu s-au putut verifica actualizările",
     "show_on_github": "Arată pe GitHub",
     "new_version_available": "O nouă versiune de PicoTorrent este disponibilă.",
     "ignore_update": "Ignoră această actualizare.",

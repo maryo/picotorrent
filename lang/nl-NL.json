@@ -74,6 +74,7 @@
     "scrape": "Schrapen",
     "picotorrent_v_available": "PicoTorrent %s beschikbaar",
     "no_update_available": "Geen update beschikbaar",
+    "update_check_failed": "Kon niet controleren op updates",
     "show_on_github": "Weergeven op GitHub",
     "new_version_available": "Er is een nieuwere versie van PicoTorrent beschikbaar.",
     "ignore_update": "Negeer deze update",

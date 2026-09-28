@@ -85,6 +85,7 @@
     "next_announce": "Következő bejelentés",
     "picotorrent_v_available": "PicoTorrent {0} elérhető",
     "no_update_available": "Nincs új frissítés",
+    "update_check_failed": "Nem sikerült ellenőrizni a frissítéseket",
     "show_on_github": "Mutasd GitHub-on",
     "new_version_available": "Egy új PicoTorrent verzió érhető el.",
     "ignore_update": "Frissítés kihagyása",

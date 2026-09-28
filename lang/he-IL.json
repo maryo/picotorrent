@@ -75,6 +75,7 @@
     "seed_mode": "מצב העלאה",
     "sequential_download": "הורדה ברצף",
     "no_update_available": "אין עדכון זמין",
+    "update_check_failed": "לא ניתן היה לבדוק עדכונים",
     "confirm_remove_description": "פעולה זו תסיר את כל הקבצים של טורנט זה.",
     "force_recheck": "אלץ בדיקה מחדש",
     "active_downloads": "הורדות פעילות",

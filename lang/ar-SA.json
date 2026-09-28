@@ -245,6 +245,7 @@
     "some_torrents_already_in_session": "غالبية البذور أضيفت سابقا و سيتم تجنبها",
     "all_torrents_already_in_session": "كل البذور أضيفت سابقا و سيتم تجنبها",
     "no_update_available": "لا تحديث موجود",
+    "update_check_failed": "تعذر التحقق من التحديثات",
     "close_to_notification_area": "غلق إلى منطقة التنبيهات",
     "new_version_available": "تحديث جديد من بيكوتورنت متوفر.",
     "force_recheck": "إجبار على اعادة التحقق",

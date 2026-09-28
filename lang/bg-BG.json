@@ -71,6 +71,7 @@
     "flags": "Флагове",
     "picotorrent_v_available": "Налично е издание %s на PicoTorrent",
     "no_update_available": "Няма ново издание",
+    "update_check_failed": "Неуспешна проверка за актуализации",
     "new_version_available": "Налично е ново издание на PicoTorrent.",
     "ignore_update": "Пропускане на издание",
     "confirm_remove": "Потвърждаване",

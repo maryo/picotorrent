@@ -59,6 +59,7 @@
     "proxy_peer_connections": "プロキシのピアツーピア通信数",
     "socks5_with_credentials": "SOCKS5 (資格情報を持っ)",
     "no_update_available": "更新はありません",
+    "update_check_failed": "更新を確認できませんでした",
     "confirm_remove_description": "これにより、このトレント用にダウンロードされたファイルがすべて削除されます。",
     "preferences": "環境設定",
     "advanced": "先進的な",

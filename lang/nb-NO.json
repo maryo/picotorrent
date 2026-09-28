@@ -83,6 +83,7 @@
     "url": "Nettadresse",
     "next_announce": "Neste annonsering",
     "no_update_available": "Ingen nye versjoner",
+    "update_check_failed": "Kunne ikke se etter oppdateringer",
     "show_on_github": "Vis på GitHub",
     "new_version_available": "En nyeere versjon av PicoTorrent er tilgjengelig.",
     "ignore_update": "Ignorer denne oppgraderingen",

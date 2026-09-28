@@ -85,6 +85,7 @@
     "scrape": "抛弃",
     "picotorrent_v_available": "PicoTorrent {0} 可用",
     "no_update_available": "你已经使用最新的版本",
+    "update_check_failed": "无法检查更新",
     "show_on_github": "在GitHub上查看",
     "new_version_available": "PicoTorrent有新的版本.",
     "ignore_update": "忽略这次升级",

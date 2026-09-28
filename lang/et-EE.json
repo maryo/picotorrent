@@ -34,6 +34,7 @@
     "ul_limit": "ÜL limiit",
     "sequential_download": "Järjestikus allalaadimine",
     "no_update_available": "Uuendusi pole saadaval",
+    "update_check_failed": "Uuenduste kontrollimine ebaõnnestus",
     "show_on_github": "Näita GitHub'is",
     "socks4": "SOCKS4",
     "socks5": "SOCKS5",

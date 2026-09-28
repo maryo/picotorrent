@@ -95,6 +95,7 @@
     "next_announce": "Nästa anrop",
     "picotorrent_v_available": "PicoTorrent {0} tillgänglig",
     "no_update_available": "Ingen uppdatering tillgänglig",
+    "update_check_failed": "Det gick inte att söka efter uppdateringar",
     "show_on_github": "Visa på GitHub",
     "new_version_available": "En nyare version av PicoTorrent är tillgänglig.",
     "ignore_update": "Ignorera denna uppdatering",

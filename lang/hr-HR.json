@@ -70,6 +70,7 @@
     "scrape": "Scrape",
     "picotorrent_v_available": "PicoTorrent %s dostupan",
     "no_update_available": "Nema ažuriranja",
+    "update_check_failed": "Provjera ažuriranja nije uspjela",
     "new_version_available": "Nova inačica PicoTorrent je dostupna.",
     "ignore_update": "Ignoriraj ovo ažuriranje",
     "confirm_remove": "Potvrdi uklanjanje",

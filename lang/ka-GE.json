@@ -86,6 +86,7 @@
     "scrape": "ფხეკა",
     "picotorrent_v_available": "PicoTorrent {0} ხელმისაწვდომია",
     "no_update_available": "განახლება არაა ხელმისაწვდომი",
+    "update_check_failed": "განახლებების შემოწმება ვერ მოხერხდა",
     "show_on_github": "ნახვა GitHub-ზე",
     "new_version_available": "ხელმისაწვდომია PicoTorrent-ის ახალი ვერსია.",
     "ignore_update": "ამ განახლების უგულებელყოფა",
